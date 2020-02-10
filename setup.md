@@ -8,14 +8,13 @@ The main requirement for this workshop is a personal computer with a web browser
 These will allow you to follow the online materials and to login to a facility with the required software stack.
 
 
-> ## SC19 Workshop Attendee Instructions
+> ## eRNZ20 Workshop Attendee Instructions
 >
-> You will will need username and password to access the training VMs, which will be provided by the instructors.
+> This tutorial is adapted from https://github.com/PawseySC/sc19-containers and delivered jointly by New Zealand eScience Infrastructure (NeSI) and Pawsey Supercomputing Centre staff..
 >
-> You will find a green and pink post-it note at your spot.  On the green note is a 3 digit number ("XXX" below).  Your login details today follow a pattern of:
+> The tutorial will be best experienced directly on NeSI's platforms. Though it is possible to follow along on a laptop we are not providing a standard environment for this and so will have limited ability to troubleshoot machine/environment specific issues during the tutorial. All the required software and container images have been preloaded on the NeSI platform under the `nesi99991` project.
 >
-> **username**: userXXX  
-> **password**: tutorialXXX
+> If you do not already have a NeSI account then please apply to [create a NeSI account](https://support.nesi.org.nz/hc/en-gb/articles/360000159715-Creating-a-NeSI-Account) well ahead of the tutorial.
 >
 > You don't need to read further for today.
 {: .callout}
@@ -23,14 +22,12 @@ These will allow you to follow the online materials and to login to a facility w
 
 ### Regular users of this tutorial: read here
 
-* **Zeus @Pawsey**: if you have access, Singularity can be loaded with `module load singularity`. MPI libraries are configured properly, and GPU applications can be run on the Slurm partition `gpuq`.
-
-* **Nimbus Cloud @Pawsey**: if you have access, both Singularity and Docker are preinstalled in the *Ubuntu Pawsey* base image.
+* **Mahuika @NeSI**: if you have access, a recent version of Singularity can be loaded with `module load singularity`.
 
 * **BYO Device**: if you have a Linux box, you can install the required software yourself (might take a while):
 
   * Essential (core of the tutorial)
-    - Singularity : [script]({{ page.root }}/files/install-singularity.sh) \| [docs](https://sylabs.io/guides/3.3/user-guide/installation.html)
+    - Singularity : [script]({{ page.root }}/files/install-singularity.sh) \| [docs](https://sylabs.io/guides/3.4/user-guide/installation.html)
 
   * Desirable (to run all Singularity examples)
     - MPICH library : [script]({{ page.root }}/files/install-mpich.sh) \| [docs](https://www.mpich.org/documentation/guides/)
@@ -46,4 +43,4 @@ These will allow you to follow the online materials and to login to a facility w
 
 **Notes**
 * Install scripts have been tested on a Ubuntu machine through a user that can run *sudo* commands without password prompts. There's no warranty they will work in your Linux box, you should consider them as templates.
-* To install Singularity on a Mac or Windows machine, follow these instructions by Sylabs on [Setting up Singularity with Vagrant](https://sylabs.io/guides/3.3/user-guide/installation.html#install-on-windows-or-mac).
+* To install Singularity on a Mac or Windows machine, follow these instructions by Sylabs on [Setting up Singularity with Vagrant](https://sylabs.io/guides/3.4/user-guide/installation.html#install-on-windows-or-mac).
