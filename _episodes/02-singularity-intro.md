@@ -43,17 +43,17 @@ $ cd demos/02_singularity
 
 > ## eRNZ20 attendees only: cached images
 >
-> For the ERNZ20 tutorial we have prepared the images to be downloaded in a specific directory. Create the following symbolic link to be able to use them. Normally downloading the required images will take up to an hour.
+> For the ERNZ20 tutorial we have prepared the images to be downloaded in a specific directory - `/nesi/nobackup/nesi99991/ernz20-containers/demos/sif/`. Create the following symbolic link to be able to use them. Normally downloading the required images will take up to an hour.
 >
 > ```
-> $ ln -s /scratch/singularity_images $SIFPATH
+> $ ln -s /nesi/nobackup/nesi99991/ernz20-containers/demos/sif $SIFPATH
 > ```
 > {: .bash}
 >
 > One more thing: much of this work will be performed interactively on our Slurm cluster, so we need to request a small allocation:
 >
 > ```
-> $ salloc --nodes=1 --ntasks-per-node=4
+> $ salloc --job-name="SingularityTutorial" --ntasks=4 --time=4:00:00 --account=nesi99991
 > ```
 > {: .bash}
 > ```
@@ -74,12 +74,12 @@ $ cd demos/02_singularity
 > ```
 > {: .bash}
 >
-> This will take at least one hour. Meanwhile, you'll be able to keep on going with this episode in your main terminal window.
+> This could take an hour or more. Meanwhile, you'll be able to keep on going with this episode in your main terminal window.
 >
 > One more thing: if you're running this tutorial on a shared HPC system (*e.g.* on NeSI's Mahuika cluster), you should use one of the compute nodes rather than the login node. You can get this setup by using an interactive scheduler allocation, for instance on Mahuika with Slurm:
 >
 > ```
-> $ salloc --job-name="SingularityTutorial" --account=nesi99991 --ntasks 1 --time 4:00:00
+> $ salloc --job-name="SingularityTutorial" --ntasks=4 --time=4:00:00
 > ```
 > {: .bash}
 >
