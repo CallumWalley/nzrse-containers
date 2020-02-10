@@ -10,7 +10,7 @@ These will allow you to follow the online materials and to login to a facility w
 
 > ## eRNZ20 Workshop Attendee Instructions
 >
-> This tutorial is adapted from https://github.com/PawseySC/sc19-containers and delivered jointly by New Zealand eScience Infrastructure (NeSI) and Pawsey Supercomputing Centre staff..
+> This tutorial is adapted from [https://github.com/PawseySC/sc19-containers](https://github.com/PawseySC/sc19-containers) and delivered jointly by New Zealand eScience Infrastructure (NeSI) and Pawsey Supercomputing Centre staff..
 >
 > The tutorial will be best experienced directly on NeSI's platforms. Though it is possible to follow along on a laptop we are not providing a standard environment for this and so will have limited ability to troubleshoot machine/environment specific issues during the tutorial. All the required software and container images have been preloaded on the NeSI platform under the `nesi99991` project.
 >
