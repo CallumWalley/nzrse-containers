@@ -10,13 +10,15 @@ These will allow you to follow the online materials and to login to a facility w
 
 > ## eRNZ20 Workshop Attendee Instructions
 >
-> This tutorial is adapted from [https://github.com/PawseySC/sc19-containers](https://github.com/PawseySC/sc19-containers) and delivered jointly by New Zealand eScience Infrastructure (NeSI) and Pawsey Supercomputing Centre staff..
+> This tutorial is adapted from [https://github.com/PawseySC/sc19-containers](https://github.com/PawseySC/sc19-containers) and delivered jointly by New Zealand eScience Infrastructure (NeSI) and Pawsey Supercomputing Centre staff.
 >
 > The tutorial will be best experienced directly on NeSI's platforms. Though it is possible to follow along on a laptop we are not providing a standard environment for this and so will have limited ability to troubleshoot machine/environment specific issues during the tutorial. All the required software and container images have been preloaded on the NeSI platform under the `nesi99991` project.
 >
 > If you do not already have a NeSI account then please apply to [create a NeSI account](https://support.nesi.org.nz/hc/en-gb/articles/360000159715-Creating-a-NeSI-Account) well ahead of the tutorial.
 >
-> You don't need to read further for today.
+> Once you have a NeSI account you will need membership in the relevant training project. Please contact NeSI Support via either the [form here](https://support.nesi.org.nz/hc/en-gb/requests/new) or [email](mailto:support@nesi.org.nz) and provide your NeSI username (subject: "container tutorial"). Updating project membership may take up to 15 minutes, so please do this ahead of the tutorial if possible.
+>
+> If you have a NeSI user account and access to the training project then you don't need to read further for today.
 {: .callout}
 
 
