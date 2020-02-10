@@ -76,10 +76,10 @@ $ cd demos/02_singularity
 >
 > This will take at least one hour. Meanwhile, you'll be able to keep on going with this episode in your main terminal window.
 >
-> One more thing: if you're running this tutorial on a shared system (*e.g.* on Zeus or Magnus at Pawsey), you should use one of the compute nodes rather than the login node. You can get this setup by using an interactive scheduler allocation, for instance on Zeus with Slurm:
+> One more thing: if you're running this tutorial on a shared HPC system (*e.g.* on NeSI's Mahuika cluster), you should use one of the compute nodes rather than the login node. You can get this setup by using an interactive scheduler allocation, for instance on Mahuika with Slurm:
 >
 > ```
-> $ salloc -n 1 -t 4:00:00
+> $ salloc --job-name="SingularityTutorial" --account=nesi99991 --ntasks 1 --time 4:00:00
 > ```
 > {: .bash}
 >
@@ -89,6 +89,7 @@ $ cd demos/02_singularity
 > salloc: Nodes z052 are ready for job
 > ```
 > {: .output}
+> See NeSI's support docs on [Slurm Interactive Sessions](https://support.nesi.org.nz/hc/en-gb/articles/360001316356) for further info.
 {: .callout}
 
 
