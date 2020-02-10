@@ -13,11 +13,10 @@ keypoints:
 ---
 
 
-> ## SC19 attendees only: let's login
+> ## eRNZ20 attendees only: let's login
 >
-> If your user number is odd, then login to: `ssh userXXX@18.234.39.151`
->
-> If your user number is even, then login to: `ssh userXXX@13.57.28.164`
+> Assuming you have followed NeSI's support [documentation](https://support.nesi.org.nz/hc/en-gb/sections/360000034315) on setting passwords and [configuring local SSH client software](https://support.nesi.org.nz/hc/en-gb/articles/360001016335-Choosing-and-Configuring-Software-for-Connecting-to-the-Clusters) then you should login to Mahuika, e.g., using a [standard terminal configuration](https://support.nesi.org.nz/hc/en-gb/articles/360000625535):
+> `ssh mahuika`
 {: .callout}
 
 
@@ -33,18 +32,18 @@ $ cd ~
 If it does not exist already, download the following Github repo. Then `cd` into it, define a couple of handy variables (see below), and finally `cd` into `demos/02_singularity`:
 
 ```
-$ git clone https://github.com/PawseySC/sc19-containers
-$ cd sc19-containers
-$ export SC19=$(pwd)
-$ export SIFPATH=$SC19/demos/sif
+$ git clone https://github.com/nesi/ernz20-containers
+$ cd ernz20-containers
+$ export ERNZ20=$(pwd)
+$ export SIFPATH=$ERNZ20/demos/sif
 $ cd demos/02_singularity
 ```
 {: .bash}
 
 
-> ## SC19 attendees only: cached images
+> ## eRNZ20 attendees only: cached images
 >
-> For the SC19 tutorial we have prepared the images to be downloaded in a specific directory. Create the following symbolic link to be able to use them. Normally downloading the required images will take up to an hour.
+> For the ERNZ20 tutorial we have prepared the images to be downloaded in a specific directory. Create the following symbolic link to be able to use them. Normally downloading the required images will take up to an hour.
 >
 > ```
 > $ ln -s /scratch/singularity_images $SIFPATH
@@ -69,9 +68,9 @@ $ cd demos/02_singularity
 > Open a second terminal in the machine where you're running the tutorial, then run the script `pull_big_images.sh` to start downloading a few images that you'll require later:
 >
 > ```
-> $ export SC19=~/sc19-containers
-> $ export SIFPATH=$SC19/demos/sif
-> $ bash $SC19/demos/pull_big_images.sh
+> $ export ERNZ20=~/ernz20-containers
+> $ export SIFPATH=$ERNZ20/demos/sif
+> $ bash $ERNZ20/demos/pull_big_images.sh
 > ```
 > {: .bash}
 >
@@ -268,7 +267,7 @@ $ singularity shell library://ubuntu:18.04
 {: .bash}
 
 ```
-Singularity ubuntu_18.04.sif:/home/ubuntu/sc19-containers/demos/02_singularity>
+Singularity ubuntu_18.04.sif:/home/ubuntu/ernz20-containers/demos/02_singularity>
 ```
 {: .output}
 
