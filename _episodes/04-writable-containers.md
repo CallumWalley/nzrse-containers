@@ -23,7 +23,7 @@ Singularity offers a feature to achieve this, called *OverlayFS*.
 Let us cd into `demos/04_trinity`:
 
 ```
-$ cd $SC19/demos/04_trinity
+$ cd $ERNZ20/demos/04_trinity
 ```
 {: .bash}
 
@@ -78,10 +78,10 @@ $ singularity shell --overlay my_overlay library://ubuntu:18.04
 Now, every new directory and file that we create from inside the container will be stored in the persistent overlay filesystem. For instance, from the interactive shell we opened let us try:
 
 ```
-$ mkdir /australia
-$ cd /australia
-$ echo perth >wa
-$ echo canberra >act
+$ mkdir /new-zealand
+$ cd /new-zealand
+$ echo auckland >north-island
+$ echo dunedin >main-land
 $ exit
 ```
 {: .bash}
@@ -89,17 +89,17 @@ $ exit
 
 > ## Access a pre-existing overlay filesystem
 >
-> Once exited the container, the newly created directory is not available in the host filesystem. Try and inspect the content of `/australia` from the host.
+> Once exited the container, the newly created directory is not available in the host filesystem. Try and inspect the content of `/new-zealand` from the host.
 >
 > > ## Solution
 > >
 > > ```
-> > $ ls /australia
+> > $ ls /new-zealand
 > > ```
 > > {: .bash}
 > >
 > > ```
-> > ls: /australia: No such file or directory
+> > ls: /new-zealand: No such file or directory
 > > ```
 > > {: .output}
 > {: .solution}
@@ -109,12 +109,12 @@ $ exit
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec --overlay my_overlay library://ubuntu:18.04 ls /australia
+> > $ singularity exec --overlay my_overlay library://ubuntu:18.04 ls /new-zealand
 > > ```
 > > {: .bash}
 > >
 > > ```
-> > act wa
+> > main-land north-island
 > > ```
 > > {: .output}
 > {: .solution}
@@ -148,13 +148,13 @@ A subdirectory in the directory we are in, `trinity_test_data/`, contains sample
 Now, let's ensure that `$SIFPATH` is defined, and that the Trinity image from Docker hub, `trinityrnaseq/trinityrnaseq:2.8.6`, has been correctly downloaded:
 
 ```
-$ export SIFPATH=$SC19/demos/sif
+$ export SIFPATH=$ERNZ20/demos/sif
 $ ls $SIFPATH/trinity*
 ```
 {: .bash}
 
 ```
-/home/ubuntu/sc19-containers/demos/sif/trinityrnaseq_2.8.6.sif
+/home/ubuntu/ernz20-containers/demos/sif/trinityrnaseq_2.8.6.sif
 ```
 {: .output}
 
@@ -229,9 +229,9 @@ $ ls -l Trinity.fasta*
 
 ### Ephemeral writable containers
 
-In some situations, you might need your container to be writable not to store persistent output files, but just to write temporary service files.  
-*E.g.* this can happen with applications that want to write a dot-file in your home, such as a Python package, or containerised Jupyter notebooks that need to write runtime information under `/run`.  
-In this context, a persistent overlay filesystem might more work than is desired. There are alternative, simpler ways to set this up.
+In some situations, you might need your container to be writable not to store persistent output files, but just to write temporary service files.
+*E.g.* this can happen with applications that want to write a dot-file in your home, such as a Python package, or containerised Jupyter notebooks that need to write runtime information under `/run`.
+In this context a persistent overlay filesystem might be overkill, as we don't need this data to persist beyond the life of the container instance. There are alternative, simpler ways to set this up.
 
 Singularity has a flag for rendering containers from SIF image files ephemerally writable. `--writable-tmpfs` will allocate a small amount of RAM for this purpose (configured by the sys admins, by default just a bunch of MB), e.g.:
 
