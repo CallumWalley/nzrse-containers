@@ -61,9 +61,13 @@ $ cd demos/02_singularity
 > ```
 > {: .bash}
 > ```
-> salloc: Granted job allocation 11
+> salloc: Granted job allocation 10179453
+> salloc: Waiting for resource configuration
+> salloc: Nodes wbn027 are ready for job
 > ```
 > {: .output}
+>
+> See NeSI's support docs on [Slurm Interactive Sessions](https://support.nesi.org.nz/hc/en-gb/articles/360001316356) for further info.
 {: .callout}
 
 
@@ -93,6 +97,7 @@ $ cd demos/02_singularity
 > salloc: Nodes z052 are ready for job
 > ```
 > {: .output}
+>
 > See NeSI's support docs on [Slurm Interactive Sessions](https://support.nesi.org.nz/hc/en-gb/articles/360001316356) for further info.
 {: .callout}
 
