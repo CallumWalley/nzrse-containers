@@ -22,10 +22,14 @@ keypoints:
 
 ### Get ready for the hands-on
 
-Before we start, let us ensure we have got the required files to run the tutorials.
+Before we start, let us ensure we have got the required files to run the tutorials. We'll create a directory on NeSI's scratch "nobackup" filesystem for you to work in. NB: these files will be removed within a day of the tutorial.
 
 ```
 $ cd ~
+$ mkdir /nesi/nobackup/nesi99991/${USER}
+$ # let's create a shortcut (aka symlink) from our home folder
+$ ln -s /nesi/nobackup/nesi99991/${USER} training-containers
+$ cd training-containers
 ```
 {: .bash}
 
@@ -43,7 +47,7 @@ $ cd demos/02_singularity
 
 > ## eRNZ20 attendees only: cached images
 >
-> For the ERNZ20 tutorial we have prepared the images to be downloaded in a specific directory - `/nesi/nobackup/nesi99991/ernz20-containers/demos/sif/`. Create the following symbolic link to be able to use them. Normally downloading the required images will take up to an hour.
+> For the ERNZ20 tutorial we have prepared some of the bigger images to be downloaded in a specific directory - `/nesi/nobackup/nesi99991/ernz20-containers/demos/sif/`. Create the following symbolic link to be able to use them. Normally downloading the required images will take up to an hour.
 >
 > ```
 > $ ln -s /nesi/nobackup/nesi99991/ernz20-containers/demos/sif $SIFPATH
@@ -53,7 +57,7 @@ $ cd demos/02_singularity
 > One more thing: much of this work will be performed interactively on our Slurm cluster, so we need to request a small allocation:
 >
 > ```
-> $ salloc --job-name="SingularityTutorial" --ntasks=4 --time=4:00:00 --account=nesi99991
+> $ salloc --job-name="SingularityTutorial" --ntasks=4 --time=4:00:00 --account=nesi99991 --reservation=workshop
 > ```
 > {: .bash}
 > ```
