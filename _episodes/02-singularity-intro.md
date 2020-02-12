@@ -51,6 +51,7 @@ $ module load Singularity
 $ singularity version
 $ singularity help
 ```
+{: .bash}
 
 > ## eRNZ20 attendees only: cached images
 >
