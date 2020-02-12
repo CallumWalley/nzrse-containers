@@ -190,7 +190,7 @@ $ ls $SIFPATH/blast*
 {: .bash}
 
 ```
-/home/ubuntu/ernz20-containers/demos/sif/blast_v2.2.31_cv2.sif
+/nesi/nobackup/nesi99991/bbet740/ernz20-containers/demos/sif/blast_v2.2.31_cv2.sif
 ```
 {: .output}
 
