@@ -58,7 +58,7 @@ A few examples of how containers are being used at Pawsey include:
 
 Here's an overview of what a typical workflow looks like:
 
-![Docker Workflow]({{ page.root }}/fig/container_lifecycle.png)
+![Docker Workflow]({{ page.root }}/fig/container_lifecycle_nesi.png)
 
 
 ### Container engines
