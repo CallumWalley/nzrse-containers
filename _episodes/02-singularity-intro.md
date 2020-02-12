@@ -306,11 +306,7 @@ $ singularity pull library://ubuntu:18.04
 {: .bash}
 
 ```
-INFO:    Key with ID EDECE4F3F38D871E not found in local keyring, downloading from keystore...
-INFO:    Container is signed
-Data integrity checked, authentic and signed by:
-    Sylabs Admin <support@sylabs.io>, Fingerprint 8883491F4268F173C6E5DC49EDECE4F3F38D871E
-WARNING: no local key matching entity
+WARNING: Container might not be trusted; run 'singularity verify ubuntu_18.04.sif' to show who signed it
 INFO:    Download complete: ubuntu_18.04.sif
 ```
 {: .output}
@@ -326,6 +322,26 @@ $ ls
 ubuntu_18.04.sif
 ```
 {: .output}
+
+Note the trust warning - do not ignore these! Singularity has features and specific services for signing and verifying the source and integrity of containers. Let's check this image:
+
+```
+$ singularity verify ubuntu_18.04.sif
+```
+{: .bash}
+
+```
+Container is signed by 1 key(s):
+
+Verifying partition: FS:
+8883491F4268F173C6E5DC49EDECE4F3F38D871E
+[REMOTE]  Sylabs Admin <support@sylabs.io>
+[OK]      Data integrity verified
+
+INFO:    Container verified: ubuntu_18.04.sif
+```
+{: .output}
+
 
 Then you can use this image file simply by:
 
