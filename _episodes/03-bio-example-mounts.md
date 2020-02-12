@@ -75,7 +75,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ```
 > > {: .output}
 > >
-> > Host and container working directories coincide!
+> > Host and container working directories coincide! Noting that on NeSI the `/nesi/nobackup/` path is a link, this gets resolved when we start the container. Multiple symlinks in your pwd hierarchy can cause issues, if this happens you'll typically end up with your container pwd in your home dir.
 > {: .solution}
 {: .challenge}
 
@@ -103,21 +103,21 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 
 > ## How about other directories in the host?
 >
-> For instance, let us inspect `$ERNZ20/_episodes`.
+> For instance, let us inspect our training project-folder: `/nesi/project/nesi99991/`.
 >
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec library://ubuntu:18.04 ls $ERNZ20/_episodes
+> > $ singularity exec library://ubuntu:18.04 ls /nesi/project/nesi99991/
 > > ```
 > > {: .bash}
 > >
 > > ```
-> > ls: cannot access '/home/ubuntu/ernz20-containers/_episodes': No such file or directory
+> > ls: cannot access '/nesi/project/nesi99991/': No such file or directory
 > > ```
 > > {: .output}
 > >
-> > Host directories external to the current directory are not visible! How can we fix this? Read on...
+> > Typically, host directories external to the current directory are not visible! Though in some cases Singularity may be configured system-wide to ensure key shared storage is available by default. Assuming this path isn't visible in this case, how can we fix this? Read on...
 > {: .solution}
 {: .challenge}
 
@@ -129,16 +129,15 @@ Singularity has the runtime flag `--bind`, `-B` in short, to mount host director
 The long syntax allows to map the host dir onto a container dir with a different name/path, `-B hostdir:containerdir`.  
 The short syntax just mounts the dir using the same name and path: `-B hostdir`.
 
-Let's use the latter syntax to mount `$ERNZ20/_episodes` into the container and re-run `ls`.
+Let's use the latter syntax to mount `/nesi/project/nesi99991` into the container and re-run `ls`.
 
 ```
-$ singularity exec -B $ERNZ20/_episodes library://ubuntu:18.04 ls $ERNZ20/_episodes
+$ singularity exec -B /nesi/project/nesi99991 library://ubuntu:18.04 ls /nesi/project/nesi99991/
 ```
 {: .bash}
 
 ```
-01-containers-intro.md    03-bio-example-mounts.md  05-gpu-gromacs.md         07-mpi-openfoam.md        09-ml-python.md           11-docker.md
-02-singularity-intro.md   04-writable-containers.md 06-build-intro.md         08-gui-rstudio.md         10-workflow-engines.md    12-other-tools.md
+hi  there
 ```
 {: .output}
 
