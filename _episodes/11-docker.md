@@ -27,7 +27,7 @@ keypoints:
 
 On the other hand, some features make it not ideal for HPC. These include:
 
-* users need *root* privileges to run it, which is not really a good idea in a shared system;
+* users need *root* privileges to run it, which is not really a good idea in a shared system (notwithstanding recent rootless Docker features available with recent host kernels);
 * *isolation* over *integration* means users need to get used to a more articulated syntax to get things working with typical HPC applications;
 * no support offered to interface Docker with MPI runtime, or HPC schedulers;
 * usually requires an up-to-date kernel.
@@ -43,7 +43,7 @@ To get a more detailed introduction on Docker containers, see this other worksho
 Let's cd into the relevant demo directory:
 
 ```
-$ cd $SC19/demos/11_lolcow_docker
+$ cd $ERNZ20/demos/11_lolcow_docker
 ```
 {: .bash}
 
@@ -222,7 +222,7 @@ CMD fortune | cowsay | lolcat
 ```
 {: .source}
 
-The directory where the the Dockerfile is stored is the so called the Docker **build context**. Docker will include files in this directory in the build process and in the final image. As a by-product, this will make the build process longer and the image larger, so that we want to include only those strictly required for the build, even none if possible.
+The directory where the Dockerfile is stored is the so called the Docker **build context**. Docker will include files in this directory in the build process and in the final image. As a by-product, this will make the build process longer and the image larger, so that we want to include only those strictly required for the build, even none if possible.
 
 Let's comment on the Docker instructions that appear in this Dockerfile.
 

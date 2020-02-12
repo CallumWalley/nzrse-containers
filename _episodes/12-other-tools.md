@@ -7,7 +7,7 @@ objectives:
 - Get an overview of other tools of interest for containers on HPC
 keypoints:
 - HPCCM can be useful to write image recipes that are compatible both with Docker and Singularity
-- Other than Singularity, at the moment other interesting container engines for HPC are Sarus and Charliecloud
+- Other than Singularity, at the moment other interesting container engines for HPC are Sarus, Charliecloud and enroot
 ---
 
 
@@ -35,7 +35,7 @@ Stage0 += label(metadata={'Version': 'v0.0.1'})
 You can cd into the demo directory:
 
 ```
-$ cd $SC19/demos/12_lolcow_hpccm
+$ cd $ERNZ20/demos/12_lolcow_hpccm
 ```
 {: .bash}
 
@@ -63,7 +63,7 @@ More information on HPCCM can be found in the [HPCCM docs](https://github.com/NV
 [Podman](https://podman.io) is an open-source container engine maintained by Red Hat. It has quite similar features to Docker, with two important differences:
 
 * runs daemon-less, making it simpler to deploy;
-* can be used in root-less mode (with some [limitations](https://github.com/containers/libpod/blob/master/rootless.md)), making it a bit friendlier for HPC.
+* can be used in root-less mode (with some [limitations](https://github.com/containers/libpod/blob/master/rootless.md)), making it a bit friendlier for HPC / multi-user environments.
 
 Like Docker, it still doesn't provide support for MPI, schedulers, GPU (natively).
 

@@ -17,7 +17,7 @@ keypoints:
 > There are examples for both using and not using the Slurm scheduler.
 {: .callout}
 
-> ## SC19 attendees only: let's login to a GPU node
+> ## ERNZ20 attendees only: let's login to a GPU node
 >
 > We've got a separate cluster up for our GPU example.  Use your existing username/password and ssh into the GPU cluster;
 > ```
@@ -28,9 +28,9 @@ keypoints:
 > Then repeat a bit of setup
 >
 > ```
-> $ git clone https://github.com/PawseySC/sc19-containers
-> $ cd sc19-containers
-> $ export SC19=$(pwd)
+> $ git clone https://github.com/PawseySC/ernz20-containers
+> $ cd ernz20-containers
+> $ export ERNZ20=$(pwd)
 > ```
 > {: .bash}
 {: .callout}
@@ -43,8 +43,8 @@ For our example we are going to use Gromacs, a quite popular molecular dynamics 
 First, let us cd into `demos/05_gromacs`, and ensure that `$SIFPATH` is defined:
 
 ```
-$ cd $SC19/demos/05_gromacs
-$ export SIFPATH=$SC19/demos/sif
+$ cd $ERNZ20/demos/05_gromacs
+$ export SIFPATH=$ERNZ20/demos/sif
 ```
 {: .bash}
 
@@ -56,7 +56,7 @@ $ ls $SIFPATH/gromacs*
 {: .bash}
 
 ```
-/home/ubuntu/sc19-containers/demos/sif/gromacs_2018.2.sif
+/home/ubuntu/ernz20-containers/demos/sif/gromacs_2018.2.sif
 ```
 {: .output}
 
