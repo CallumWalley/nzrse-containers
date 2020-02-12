@@ -323,7 +323,7 @@ ubuntu_18.04.sif
 ```
 {: .output}
 
-Note the trust warning - do not ignore these! Singularity has features and specific services for signing and verifying the source and integrity of containers. Let's check this image:
+Also note the trust warning from when we pulled the container image - do not ignore these! Singularity has features and specific services for signing and verifying the source and integrity of containers. Let's check this image:
 
 ```
 $ singularity verify ubuntu_18.04.sif
@@ -342,8 +342,9 @@ INFO:    Container verified: ubuntu_18.04.sif
 ```
 {: .output}
 
+This tells us that the container was signed by Sylabs Admin and that the integrity of the image is ok, i.e., it hasn't been changed since it was built and signed.
 
-Then you can use this image file simply by:
+Now that we've checked the image we can use the image file simply by:
 
 ```
 $ singularity exec ./ubuntu_18.04.sif echo "Hello World"
