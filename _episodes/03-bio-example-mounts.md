@@ -58,7 +58,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > {: .bash}
 >
 > ```
-> /home/ubuntu/ernz20-containers/demos
+> /nesi/nobackup/nesi99991/${USER}/ernz20-containers/demos
 > ```
 > {: .output}
 >
@@ -71,7 +71,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ```
 > > {: .bash}
 > > ```
-> > /home/ubuntu/ernz20-containers/demos
+> > /scale_wlg_nobackup/filesets/nobackup/nesi99991/${USER}/ernz20-containers/demos
 > > ```
 > > {: .output}
 > >

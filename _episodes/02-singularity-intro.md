@@ -27,9 +27,7 @@ Before we start, let us ensure we have got the required files to run the tutoria
 ```
 $ cd ~
 $ mkdir /nesi/nobackup/nesi99991/${USER}
-$ # let's create a shortcut (aka symlink) from our home folder
-$ ln -s /nesi/nobackup/nesi99991/${USER} training-containers
-$ cd training-containers
+$ cd /nesi/nobackup/nesi99991/${USER}
 ```
 {: .bash}
 
