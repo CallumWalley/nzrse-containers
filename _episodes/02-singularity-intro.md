@@ -44,6 +44,13 @@ $ cd demos/02_singularity
 ```
 {: .bash}
 
+We also need to initialise your environment to make Singularity available. NeSI maintains up-to-date versions of Singularity as software modules on Mahuika. Load the latest Singularity and check the version. Note that the `singularity` command includes extensive self-documentation::
+
+```
+$ module load Singularity
+$ singularity version
+$ singularity help
+```
 
 > ## eRNZ20 attendees only: cached images
 >
