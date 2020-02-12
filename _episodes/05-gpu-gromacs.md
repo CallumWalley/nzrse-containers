@@ -19,19 +19,7 @@ keypoints:
 
 > ## ERNZ20 attendees only: let's login to a GPU node
 >
-> We've got a separate cluster up for our GPU example.  Use your existing username/password and ssh into the GPU cluster;
-> ```
-> ssh username@18.208.172.208
-> ```
-> {: .bash}
->
-> Then repeat a bit of setup
->
-> ```
-> $ git clone https://github.com/PawseySC/ernz20-containers
-> $ cd ernz20-containers
-> $ export ERNZ20=$(pwd)
-> ```
+> We'll be skipping this one today sorry, but please read through the example and we'll update this to work on NeSI in future.
 > {: .bash}
 {: .callout}
 
