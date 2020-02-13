@@ -83,7 +83,7 @@ Here, we're saying we want the web server to listen to port 8787 on any IP addre
 >
 > In order to be able to use the web server, you need to ensure that the machine you are running Singularity from has opened the communication port you're using, in this case `8787`.  
 > In cloud virtual machines this will typically involve some setup in the system dashboard.  
-> The machines we provided for this workshop are ready to go in this regard.
+> If you're running on a HPC system then you'll need to configure some sort of port forwarding. NeSI has some documentation covering this for [JupyterLab](https://support.nesi.org.nz/hc/en-gb/articles/360001093315-JupyterLab), which you can use for this tutorial.
 {: .callout}
 
 
