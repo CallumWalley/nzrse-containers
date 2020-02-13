@@ -67,6 +67,9 @@ From: ubuntu:18.04
 ```
 {: .source}
 
+> ## ERNZ20 attendees and those running on a HPC system: you won't be able to elevate privileges using sudo, please read through to the remote building section and setup a cloud.sylabs.io account in order to perform remote builds.
+{: .callout}
+
 Let us build the image and run it first, then we'll comment on the contents of the def file. To this end we're using `sudo singularity build`, followed by the filename we decide to attribute to the container image, and then by the filename of the def file to be used:
 
 ```
