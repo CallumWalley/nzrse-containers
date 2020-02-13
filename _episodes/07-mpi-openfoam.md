@@ -15,7 +15,7 @@ keypoints:
 > ## Note
 >
 > To run exercises from this episode on your own, you'll need a machine with MPICH libraries and Slurm scheduler installed.  
-> If you only have MPICH but not Slurm, you can achieve the same outcomes below by executing `./mpi_mpirun.sh` in substitution for `sbatch mpi_rnz20.sh`.
+> If you only have MPICH but not Slurm, you can achieve the same outcomes below by executing `./mpi_mpirun.sh` in substitution for `sbatch mpi_ernz20.sh`.
 > {: .callout}
 
 
@@ -35,14 +35,14 @@ $ ls $SIFPATH/openfoam*.sif
 {: .bash}
 
 ```
-/home/ubuntu/rnz20-containers/demos/sif/openfoam_v1812.sif
+/home/ubuntu/ernz20-containers/demos/sif/openfoam_v1812.sif
 ```
 {: .output}
 
-Now, let us use the Slurm scheduler to submit the job script `mpi_rnz20.sh`, that will run the sample simulation:
+Now, let us use the Slurm scheduler to submit the job script `mpi_ernz20.sh`, that will run the sample simulation:
 
 ```
-$ sbatch mpi_rnz20.sh
+$ sbatch mpi_ernz20.sh
 ```
 {: .bash}
 
@@ -57,7 +57,7 @@ $ ls -ltr
 total 80
 -rwxr-xr-x 1 user000 tutorial  1304 Nov 16 17:36 update-settings.sh
 drwxr-xr-x 2 user000 tutorial   141 Nov 16 17:36 system
--rw-r--r-- 1 user000 tutorial   937 Nov 16 17:36 mpi_rnz20.sh
+-rw-r--r-- 1 user000 tutorial   937 Nov 16 17:36 mpi_ernz20.sh
 -rw-r--r-- 1 user000 tutorial   871 Nov 16 17:36 mpi_pawsey.sh
 -rwxr-xr-x 1 user000 tutorial   789 Nov 16 17:36 mpi_mpirun.sh
 drwxr-xr-x 2 user000 tutorial    59 Nov 16 17:36 0
@@ -82,7 +82,7 @@ What has just happened?
 
 ### A batch script for MPI applications with containers
 
-Let's have a look at the content of the script (`mpi_rnz20.sh`) we executed through the scheduler:
+Let's have a look at the content of the script (`mpi_ernz20.sh`) we executed through the scheduler:
 
 ```
 #!/bin/bash -l
