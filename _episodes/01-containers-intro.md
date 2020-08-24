@@ -50,7 +50,7 @@ A few examples of how containers are used at NeSI:
 Here's an overview of what a typical workflow looks like:
 
 <!-- ![Container Workflow]({{ page.root }}/fig/container_lifecycle.png) -->
-<img src="{{ page.root }}/fig/container_lifecycle.png" alt="Container Workflow" width="716" height="298"/>
+<img src="{{ page.root }}/fig/container_lifecycle_nesi.png" alt="Container Workflow" width="716" height="298"/>
 
 
 ### Terminology
