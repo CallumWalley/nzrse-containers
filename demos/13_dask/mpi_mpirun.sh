@@ -1,0 +1,7 @@
+#!/bin/bash
+
+module load Singularity impi
+module unload XALT
+unset I_MPI_PMI_LIBRARY
+
+mpirun -np 3 singularity run dask.sif dask_example.py
