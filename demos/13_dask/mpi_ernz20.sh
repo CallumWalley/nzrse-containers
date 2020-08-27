@@ -10,4 +10,4 @@
 module load Singularity
 module unload XALT
 
-srun singularity run $SIFPATH/dask-mpi_latest.sif dask_example.py
+srun singularity run -B $PWD $SIFPATH/dask-mpi_latest.sif dask_example.py
