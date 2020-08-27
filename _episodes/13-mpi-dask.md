@@ -91,7 +91,7 @@ Exit from the session using Python's `exit()` command.
 
 Container behaviour is as requested - remember that we asked Singularity to load our `daskenv` environment and launch Python. We can pass command line arguments to Python as well:
 ```
-$ singularity run dask-mpi_latest.sif --version
+$ singularity run $SIFPATH/dask-mpi_latest.sif --version
 ```
 {: .bash}
 
@@ -149,7 +149,7 @@ Let's have a look at the content of the script (`mpi_ernz20.sh`) we executed thr
 module load Singularity
 module unload XALT
 
-srun singularity run $SIFPATH/dask-mpi_latest.sif dask_example.py
+srun singularity run -B $PWD $SIFPATH/dask-mpi_latest.sif dask_example.py
 ```
 {: .bash}
 
