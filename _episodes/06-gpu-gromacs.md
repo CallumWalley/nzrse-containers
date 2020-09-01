@@ -100,13 +100,13 @@ $ sbatch gpu.sh
 {: .bash}
 
 
-> ## Running this example at Pawsey
+> ## Running this example on NeSI
 >
-> If you try and run this on *Zeus* at Pawsey,
-> you might want to add `module load singularity` after the `#SBATCH` lines in the script.
+> If you try and run this on *Mahuika* at NeSI,
+> you might want to add `module load Singularity` after the `#SBATCH` lines in the script.
 > You might also want to edit the submission command as follows:
 > ```
-> $ sbatch --account=<your-pawsey-project> --partition=gpuq gpu.sh
+> $ sbatch --account=<your-pawsey-project> --partition=gpu gpu.sh
 > ```
 > {: .bash}
 {: .callout}
