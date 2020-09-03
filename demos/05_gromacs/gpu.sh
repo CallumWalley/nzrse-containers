@@ -21,7 +21,8 @@ OLD_PATH=$(${SINGULARITY} printenv | grep LD_LIBRARY_PATH | awk -F= '{print $2}'
 export SINGULARITYENV_LD_LIBRARY_PATH="${OLD_PATH}:${LD_LIBRARY_PATH}"
 
 # run Gromacs preliminary step with container
-srun ${SINGULARITY} gmx grompp -f pme.mdp
+srun ${SINGULARITY} \
+    gmx grompp -f pme.mdp
 
 # Run Gromacs MD with container
 srun ${SINGULARITY} \
