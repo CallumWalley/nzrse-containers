@@ -55,7 +55,7 @@ $ gunzip conf.gro.gz
 ```
 {: .bash}
 
-Now, from a Singularity perspective, all we need to do to run a GPU application from a container is to add the runtime flag `--nv`. This will make Singularity look for the Nvidia drivers in the host, and mount them inside the container.
+In theory, all we should need to do from a Singularity perspective to run a GPU application from a container is to add the runtime flag `--nv`. This will make Singularity look for the Nvidia drivers in the host, and mount them inside the container. However, on NeSI we have installed the Nvidia drivers in non-standard locations, so some additional steps are required.
 
 On the host system side, when running GPU applications through Singularity the only requirement consists of the Nvidia driver for the relevant GPU card (the corresponding file is typically called `libcuda.so.<VERSION>` and is located in some library subdirectory of `/usr`).
 
@@ -82,17 +82,33 @@ GPU resources are usually made available in HPC systems through schedulers, to w
 #SBATCH --ntasks=1
 #SBATCH --time=01:00:00
 
+# load environment modules
+module load Singularity CUDA
+
+# path to SIF
+SIF=${SIFPATH}/gromacs_2018.2.sif
+
+# singularity command with required arguments
+# "-B /cm/local/apps/cuda" and "-B ${EBROOTCUDA}" are required for the
+# container to access the host CUDA drivers and libs
+SINGULARITY="$(which singularity) exec --nv -B ${PWD}:/host_pwd \
+  -B /cm/local/apps/cuda -B ${EBROOTCUDA} --pwd /host_pwd ${SIF}"
+
+# extend container LD_LIBRARY_PATH so it can find CUDA libs
+OLD_PATH=$(${SINGULARITY} printenv | grep LD_LIBRARY_PATH | awk -F= '{print $2}')
+export SINGULARITYENV_LD_LIBRARY_PATH="${OLD_PATH}:${LD_LIBRARY_PATH}"
+
 # run Gromacs preliminary step with container
-srun singularity exec --nv $SIFPATH/gromacs_2018.2.sif \
+srun ${SINGULARITY} \
     gmx grompp -f pme.mdp
 
 # Run Gromacs MD with container
-srun singularity exec --nv $SIFPATH/gromacs_2018.2.sif \
+srun ${SINGULARITY} \
     gmx mdrun -ntmpi 1 -nb gpu -pin on -v -noconfout -nsteps 5000 -s topol.tpr -ntomp 1
 ```
 {: .bash}
 
-Basically, we have just combined the Slurm command `srun` with `singularity exec <..>`. We can submit the script with:
+Basically, we have just combined the Slurm command `srun` with `singularity run <..>`, with a few additional steps to enable Singularity to locate the Nvidia drivers and libraries on the host. We can submit the script with:
 
 ```
 $ sbatch gpu.sh
@@ -103,10 +119,9 @@ $ sbatch gpu.sh
 > ## Running this example on NeSI
 >
 > If you try and run this on *Mahuika* at NeSI,
-> you might want to add `module load Singularity` after the `#SBATCH` lines in the script.
 > You might also want to edit the submission command as follows:
 > ```
-> $ sbatch --account=<your-pawsey-project> --partition=gpu gpu.sh
+> $ sbatch --account=<your-nesi-project> gpu.sh
 > ```
 > {: .bash}
 {: .callout}
@@ -116,7 +131,7 @@ $ sbatch gpu.sh
 >
 >The GPU manufacturer *Nvidia* has a dedicated web registry for container images, shipping GPU optimised applications: <https://ngc.nvidia.com>.
 >
->To browse this registry, you'll need a free account. Go to <https://ngc.nvidia.com>, complete the procedure to **Create an account**, then **Sign in** (currently both >options are available on the top right corner of the page).
->
 >You can browse the available containerised packages through the various category boxes. E.g. click on the **High Performance Computing** box, then click on the >**Gromacs** one.
+>
+> NeSI also has documentation for running NGC containers on our platforms: <https://support.nesi.org.nz/hc/en-gb/articles/360001500156-NVIDIA-GPU-Containers>.
 {: .callout}
