@@ -25,29 +25,29 @@ keypoints:
 Before we start, let us ensure we have got the required files to run the tutorials. We'll create a directory on NeSI's scratch "nobackup" filesystem for you to work in. NB: these files will be removed within a day of the tutorial.
 
 ```
-$ cd ~
-$ mkdir /nesi/nobackup/nesi99991/${USER}
-$ cd /nesi/nobackup/nesi99991/${USER}
+cd ~
+mkdir /nesi/nobackup/nesi99991/${USER}
+cd /nesi/nobackup/nesi99991/${USER}
 ```
 {: .bash}
 
 If it does not exist already, download the following Github repo. Then `cd` into it, define a couple of handy variables (see below), and finally `cd` into `demos/02_singularity`:
 
 ```
-$ git clone https://github.com/nesi/ernz20-containers
-$ cd ernz20-containers
-$ export ERNZ20=$(pwd)
-$ export SIFPATH=$ERNZ20/demos/sif
-$ cd demos/02_singularity
+git clone https://github.com/nesi/ernz20-containers
+cd ernz20-containers
+export ERNZ20=$(pwd)
+export SIFPATH=$ERNZ20/demos/sif
+cd demos/02_singularity
 ```
 {: .bash}
 
 We also need to initialise your environment to make Singularity available. NeSI maintains up-to-date versions of Singularity as software modules on Mahuika. Load the latest Singularity and check the version. Note that the `singularity` command includes extensive self-documentation::
 
 ```
-$ module load Singularity
-$ singularity version
-$ singularity help
+module load Singularity
+singularity version
+singularity help
 ```
 {: .bash}
 
@@ -141,7 +141,7 @@ Note that Singularity versions prior to 3.0 used a slightly different image form
 Running a command is done by means of `singularity exec`:
 
 ```
-$ singularity exec library://library/default/ubuntu:18.04 cat /etc/os-release
+singularity exec library://library/default/ubuntu:18.04 cat /etc/os-release
 ```
 {: .bash}
 
@@ -182,7 +182,7 @@ Container images have a **name** and a **tag**, in this case `ubuntu` and `18.04
 The prefix `library://` makes Singularity pull the image from the default registry, that is the [**Sylabs Cloud Library**](https://cloud.sylabs.io). Images in there are organised in terms of **users** (`library` in this case) and **user collections** (optional, `default` in the example above). Note that in the particular case of `library/default/`, this specification could be skipped, for instance:
 
 ```
-$ singularity exec library://ubuntu:18.04 echo "Hello World"
+singularity exec library://ubuntu:18.04 echo "Hello World"
 ```
 {: .bash}
 
@@ -199,7 +199,7 @@ Here we are also experiencing image caching in action: the output has no more me
 Now let's try and download a Ubuntu container from the [**Docker Hub**](https://hub.docker.com), *i.e.* the main registry for Docker containers:
 
 ```
-$ singularity exec docker://library/ubuntu:18.04 cat /etc/os-release
+singularity exec docker://library/ubuntu:18.04 cat /etc/os-release
 ```
 {: .bash}
 
@@ -278,7 +278,7 @@ Sometimes it can be useful to open a shell inside a container, rather than to ex
 Achieve this by using `singularity shell`:
 
 ```
-$ singularity shell library://ubuntu:18.04
+singularity shell library://ubuntu:18.04
 ```
 {: .bash}
 
@@ -299,7 +299,7 @@ An alternative option to handle images is to download them to a known location, 
 Let's use `singularity pull` to save the image to a specified path (output might differ depending on the Singularity version you use):
 
 ```
-$ singularity pull library://ubuntu:18.04
+singularity pull library://ubuntu:18.04
 ```
 {: .bash}
 
@@ -312,7 +312,7 @@ INFO:    Download complete: ubuntu_18.04.sif
 By default, the image is saved in the current directory:
 
 ```
-$ ls
+ls
 ```
 {: .bash}
 
@@ -324,7 +324,7 @@ ubuntu_18.04.sif
 Also note the trust warning from when we pulled the container image - do not ignore these! Singularity has features and specific services for signing and verifying the source and integrity of containers. Let's check this image:
 
 ```
-$ singularity verify ubuntu_18.04.sif
+singularity verify ubuntu_18.04.sif
 ```
 {: .bash}
 
@@ -345,7 +345,7 @@ This tells us that the container was signed by Sylabs Admin and that the integri
 Now that we've checked the image we can use the image file simply by:
 
 ```
-$ singularity exec ./ubuntu_18.04.sif echo "Hello World"
+singularity exec ./ubuntu_18.04.sif echo "Hello World"
 ```
 {: .bash}
 
@@ -357,8 +357,8 @@ Hello World
 You can specify the storage location with:
 
 ```
-$ mkdir -p sif_lib
-$ singularity pull --dir sif_lib docker://library/ubuntu:18.04
+mkdir -p sif_lib
+singularity pull --dir sif_lib docker://library/ubuntu:18.04
 ```
 {: .bash}
 
@@ -368,7 +368,7 @@ INFO:    Using cached image
 {: .output}
 
 ```
-$ ls sif_lib
+ls sif_lib
 ```
 {: .bash}
 
@@ -398,7 +398,7 @@ Similarly, if you have a preferred location to pull images into you can avoid us
 If you are running out of disk space, you can inspect the cache with this command (add `-v` from Singularity version 3.4 on):
 
 ```
-$ singularity cache list
+singularity cache list
 ```
 {: .bash}
 
@@ -416,7 +416,7 @@ Total space used: 117.83 MB
 and then clean it up, *e.g.* to wipe everything use the `-a` flag (use `-f` instead from Singularity version 3.4 on):
 
 ```
-$ singularity cache clean -a
+singularity cache clean -a
 ```
 {: .bash}
 
