@@ -38,7 +38,7 @@ This example is adapted from this well crafted [Singularity Tutorial](https://gi
 Let us cd into the appropriate directory:
 
 ```
-$ cd $ERNZ20/demos/06_lolcow
+cd $ERNZ20/demos/06_lolcow
 ```
 {: .bash}
 
@@ -74,7 +74,7 @@ From: ubuntu:18.04
 Let us build the image and run it first, then we'll comment on the contents of the def file. To this end we're using `sudo singularity build`, followed by the filename we decide to attribute to the container image, and then by the filename of the def file to be used:
 
 ```
-$ sudo singularity build lolcow.sif lolcow.def
+sudo singularity build lolcow.sif lolcow.def
 ```
 {: .bash}
 
@@ -95,7 +95,7 @@ INFO:    Build complete: lolcow.sif
 Now, let us try and use the container simply as an executable:
 
 ```
-$ ./lolcow.sif
+./lolcow.sif
 ```
 {: .bash}
 
@@ -143,7 +143,7 @@ This section is used to copy files from the host, *i.e.* <src-file>, inside the 
 The `%labels` section is used to add metadata to the container image. These can be then inspected by using
 
 ```
-$ singularity inspect lolcow.sif
+singularity inspect lolcow.sif
 ```
 {: .bash}
 
@@ -166,7 +166,7 @@ See how the `Author` and `Version` metadata are in the list.
 The text content of the `%help` section is also embedded in the image, and can be accessed via
 
 ```
-$ singularity run-help lolcow.sif
+singularity run-help lolcow.sif
 ```
 {: .bash}
 
@@ -182,7 +182,7 @@ This can be useful to provide a description of the container, or even instructio
 Finally, note how the def file used to generate the image can be displayed using
 
 ```
-$ singularity inspect --deffile lolcow.sif
+singularity inspect --deffile lolcow.sif
 ```
 {: .bash}
 
@@ -234,7 +234,7 @@ $ singularity inspect --deffile lolcow.sif
 There's one section of the def file we haven't commented on yet. `%runscript` allows you to define a default command for the image. This command can then be used if you run the container as an executable:
 
 ```
-$ ./lolcow.sif
+./lolcow.sif
 ```
 {: .bash}
 
@@ -254,7 +254,7 @@ $ ./lolcow.sif
 Or, if you need to specify Singularity runtime flags, *e.g.*:
 
 ```
-$ singularity run -B $ERNZ20/_episodes lolcow.sif
+singularity run -B $ERNZ20/_episodes lolcow.sif
 ```
 {: .bash}
 
@@ -283,7 +283,7 @@ Once you create an account, you'll need to click on your account name on the top
 Then you can configure the machine you're using for building container images, so that you can also push them to the Cloud Library:
 
 ```
-$ singularity remote login
+singularity remote login
 ```
 {: .bash}
 
@@ -303,7 +303,7 @@ INFO:    API Key Verified!
 You are now ready to push your image to the Cloud Library, *e.g.* via `singularity push`:
 
 ```
-$ singularity push -U lolcow.sif library://<YOUR-SYLABS-USERNAME>/default/lolcow:30oct19
+singularity push -U lolcow.sif library://<YOUR-SYLABS-USERNAME>/default/lolcow:30oct19
 ```
 {: .bash}
 
@@ -319,7 +319,7 @@ Also note once again the format for the registry: <user>/<user-collection>/<name
 Finally, you (or other peers) are now able to pull your image from the Cloud Library:
 
 ```
-$ singularity pull -U library://<YOUR-SYLABS-USERNAME>/default/lolcow:30oct19
+singularity pull -U library://<YOUR-SYLABS-USERNAME>/default/lolcow:30oct19
 ```
 {: .bash}
 
@@ -339,7 +339,7 @@ What if you need to build an image from a system where you don't have admin priv
 Singularity offers the option to run build remotely, using the **Sylabs Remote Builder**; once again you will need a Sylabs account and a token to use this feature. If this is the case, just use `singularity build -r` to proceed with the remote build. Once finished, the image will be downloaded so that it's ready to use:
 
 ```
-$ singularity build -r lolcow_remote.sif lolcow.def
+singularity build -r lolcow_remote.sif lolcow.def
 ```
 {: .bash}
 
@@ -375,14 +375,14 @@ In the episode on GUI applications we'll see how to use `%startscript` to config
 If you are in a development phase, where you don't know yet what you will include in your final container image, you can start with a *sandbox* image. This is a special type of image designed for development purposes, consisting not of a single file, but instead of a directory. To create one, run something like:
 
 ```
-$ sudo singularity build --sandbox playbox/ docker://ubuntu:18.04
+sudo singularity build --sandbox playbox/ docker://ubuntu:18.04
 ```
 {: .bash}
 
 Then to open it and play, run:
 
 ```
-$ sudo singularity shell --writable playbox/
+sudo singularity shell --writable playbox/
 ```
 {: .bash}
 

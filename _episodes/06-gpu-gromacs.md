@@ -31,15 +31,15 @@ For our example we are going to use Gromacs, a quite popular molecular dynamics 
 First, let us cd into `demos/05_gromacs`, and ensure that `$SIFPATH` is defined:
 
 ```
-$ cd $ERNZ20/demos/05_gromacs
-$ export SIFPATH=$ERNZ20/demos/sif
+cd $ERNZ20/demos/05_gromacs
+export SIFPATH=$ERNZ20/demos/sif
 ```
 {: .bash}
 
 Now, let's verify that the container image `nvcr.io/hpc/gromacs:2018.2` has been correctly downloaded:
 
 ```
-$ ls $SIFPATH/gromacs*
+ls $SIFPATH/gromacs*
 ```
 {: .bash}
 
@@ -51,7 +51,7 @@ $ ls $SIFPATH/gromacs*
 The current directory has got sample input files picked from the collection of [Gromacs benchmark examples](ftp://ftp.gromacs.org/pub/benchmarks/water_GMX50_bare.tar.gz). In particular, we're going to use the subset `water-cut1.0_GMX50_bare/1536/`. First let's `gunzip` one of the required input files:
 
 ```
-$ gunzip conf.gro.gz
+gunzip conf.gro.gz
 ```
 {: .bash}
 
@@ -111,7 +111,7 @@ srun ${SINGULARITY} \
 Basically, we have just combined the Slurm command `srun` with `singularity run <..>`, with a few additional steps to enable Singularity to locate the Nvidia drivers and libraries on the host. We can submit the script with:
 
 ```
-$ sbatch gpu.sh
+sbatch gpu.sh
 ```
 {: .bash}
 

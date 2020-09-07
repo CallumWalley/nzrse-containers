@@ -20,7 +20,7 @@ R is a popular language in several domains of science, mostly because of its sta
 The group [Rocker](https://hub.docker.com/r/rocker) has published a large number of R images we can use, including an Rstudio image.  To begin, let's cd into the appropriate directory:
 
 ```
-$ cd $ERNZ20/demos/08_rstudio
+cd $ERNZ20/demos/08_rstudio
 ```
 {: .bash}
 
@@ -46,7 +46,7 @@ To begin with, we are going to run a minimalistic example taken from the worksho
 Let us start with running the R script through the R container; we're going to compute average values in this example:
 
 ```
-$ singularity exec tidyverse_3.6.1.sif Rscript readings-density.R --mean inflammation-density.png data/inflammation-*.csv
+singularity exec tidyverse_3.6.1.sif Rscript readings-density.R --mean inflammation-density.png data/inflammation-*.csv
 ```
 {: .bash}
 
@@ -72,7 +72,7 @@ Beside developing R container images, Rocker has also some useful documentation 
 The Rocker documentation page suggests that an appropriate command to spawn the RStudio server is (do not run it, yet, we'll do it from the container):
 
 ```
-$ rserver --www-port 8787 --www-address 0.0.0.0 --auth-none=0  --auth-pam-helper-path=pam-helper
+rserver --www-port 8787 --www-address 0.0.0.0 --auth-none=0  --auth-pam-helper-path=pam-helper
 ```
 {: .bash}
 
@@ -90,8 +90,8 @@ Here, we're saying we want the web server to listen to port 8787 on any IP addre
 Do we need more? Yes, we need to ensure we know the username and password for authenticating; *rserver* will configure them based on the values of the environment variables `USER` and `PASSWORD`; normally we would pick a random string for the latter. Today we'll use 'password'.
 
 ```
-$ export PASSWORD=password
-$ echo $USER && echo $PASSWORD
+export PASSWORD=password
+echo $USER && echo $PASSWORD
 ```
 {: .bash}
 
@@ -99,18 +99,18 @@ Lastly, containers are read-only, but RStudio will want to be able to write conf
 There's a little caveat here, in that the actual username in the RStudio server will be `rstudio` if the host user has ID equal to 1000 (first user in the system), and it will instead be the same as the host `$USER` otherwise. Let us code these conditions as follows:
 
 ```
-$ export R_USER=$USER && [ "$(id -u)" == "1000" ] && export R_USER=rstudio
+export R_USER=$USER && [ "$(id -u)" == "1000" ] && export R_USER=rstudio
 ```
 {: .bash}
 
 Now we have everything we need to put together the Singularity idiomatic way to launch an interactive RStudio web server:
 
 ```
-$ export PASSWORD=password
-$ echo $USER && echo $PASSWORD
-$ export R_USER=$USER && [ "$(id -u)" == "1000" ] && export R_USER=rstudio
+export PASSWORD=password
+echo $USER && echo $PASSWORD
+export R_USER=$USER && [ "$(id -u)" == "1000" ] && export R_USER=rstudio
 
-$ singularity exec -c -B $(pwd):/home/$R_USER tidyverse_3.6.1.sif rserver --www-port 8787 --www-address 0.0.0.0 --auth-none=0 --auth-pam-helper-path=pam-helper
+singularity exec -c -B $(pwd):/home/$R_USER tidyverse_3.6.1.sif rserver --www-port 8787 --www-address 0.0.0.0 --auth-none=0 --auth-pam-helper-path=pam-helper
 ```
 {: .bash}
 
@@ -180,11 +180,11 @@ Basically, we're starting from the `tidyverse` Docker image we used above, and t
 Once the container image is build, let's use it to start an instance via `singularity instance start`. Note how the other options are the same as in the interactive session above; the only addition is the specification of a name for the instance, `myserver` in this case, that has to follow the image name:
 
 ```
-$ export PASSWORD=password
-$ echo $USER && echo $PASSWORD
-$ export R_USER=$USER && [ "$(id -u)" == "1000" ] && export R_USER=rstudio
+export PASSWORD=password
+echo $USER && echo $PASSWORD
+export R_USER=$USER && [ "$(id -u)" == "1000" ] && export R_USER=rstudio
 
-$ singularity instance start -c -B $(pwd):/home/$R_USER tidyverse_long.sif myserver
+singularity instance start -c -B $(pwd):/home/$R_USER tidyverse_long.sif myserver
 ```
 {: .bash}
 
@@ -196,7 +196,7 @@ INFO:    instance started successfully
 We can check on the running instances with
 
 ```
-$ singularity instance list
+singularity instance list
 ```
 {: .bash}
 
@@ -209,14 +209,14 @@ myserver         18080    /home/ubuntu/ernz20-containers/demos/08_rstudio/tidyve
 Note that we can run commands from the instance by referring to it as `instance://<INSTANCE-NAME>`, *e.g.*
 
 ```
-$ singularity exec instance://myserver echo $USER $PASSWORD
+singularity exec instance://myserver echo $USER $PASSWORD
 ```
 {: .bash}
 
 Once we've finished with RStudio, we can shutdown the instance with
 
 ```
-$ singularity instance stop myserver
+singularity instance stop myserver
 ```
 {: .bash}
 

@@ -17,7 +17,7 @@ keypoints:
 Let's start and `cd` into the root demo directory:
 
 ```
-$ cd $ERNZ20/demos
+cd $ERNZ20/demos
 ```
 {: .bash}
 
@@ -26,7 +26,7 @@ What directories can we access from the container?
 First, let us assess what the content of the root directory `/` looks like outside *vs* inside the container, to highlight the fact that a container runs on his own filesystem:
 
 ```
-$ ls /
+ls /
 ```
 {: .bash}
 
@@ -38,7 +38,7 @@ bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  s
 
 Now let's look at the root directory when we're in the container
 ```
-$ singularity exec library://ubuntu:18.04 ls /
+singularity exec library://ubuntu:18.04 ls /
 ```
 {: .bash}
 
@@ -132,7 +132,7 @@ The short syntax just mounts the dir using the same name and path: `-B hostdir`.
 Let's use the latter syntax to mount `/nesi/project/nesi99991` into the container and re-run `ls`.
 
 ```
-$ singularity exec -B /nesi/project/nesi99991 library://ubuntu:18.04 ls /nesi/project/nesi99991/
+singularity exec -B /nesi/project/nesi99991 library://ubuntu:18.04 ls /nesi/project/nesi99991/
 ```
 {: .bash}
 
@@ -151,7 +151,7 @@ If you need to mount multiple directories, you can either repeat the `-B` flag m
 
 Also, if you want to keep the runtime command compact, you can equivalently specify directories to be bind mounting using an environment variable:
 ```
-$ export SINGULARITY_BINBPATH="dir1,dir2,dir3"
+export SINGULARITY_BINBPATH="dir1,dir2,dir3"
 ```
 {: .bash}
 
@@ -185,7 +185,7 @@ This example is adapted from the [BioContainers documentation](http://biocontain
 We're going to use the BLAST image `biocontainers/blast:v2.2.31_cv2`, which we previously downloaded in `$SIFPATH`. Let's verify it's there:
 
 ```
-$ ls $SIFPATH/blast*
+ls $SIFPATH/blast*
 ```
 {: .bash}
 
@@ -221,8 +221,8 @@ $ ls $SIFPATH/blast*
 Now, the `demos/03_blast` demo directory contains a human prion FASTA sequence, `P04156.fasta`, whereas another directory, `demos/03_blast_db`, contains a gzipped reference database to blast against, `zebrafish.1.protein.faa.gz`. Let us `cd` to the latter directory and uncompress the database:
 
 ```
-$ cd $ERNZ20/demos/03_blast_db
-$ gunzip zebrafish.1.protein.faa.gz
+cd $ERNZ20/demos/03_blast_db
+gunzip zebrafish.1.protein.faa.gz
 ```
 {: .bash}
 
@@ -263,7 +263,7 @@ After the container has terminated, you should see several new files in the curr
 Now let's proceed to the final alignment step using `blastp`. We need to cd into `demos/03_blast`:
 
 ```
-$ cd ../03_blast
+cd ../03_blast
 ```
 {: .bash}
 
@@ -291,7 +291,7 @@ $ cd ../03_blast
 The final results are stored in `results.txt`:
 
 ```
-$ less results.txt
+less results.txt
 ```
 {: .bash}
 
