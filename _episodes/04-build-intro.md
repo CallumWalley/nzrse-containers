@@ -275,7 +275,7 @@ singularity run -B $ERNZ20/_episodes lolcow.sif
 
 Now that you've built your container image, you might want to run it on other systems, or share it with collaborators.
 
-The simplest way to achieve this is to remember that a SIF image is just a file, so .. you can transfer it across systems using Linux command line utilities like `scp` or `rsync`, or even graphical applications such as `Filezilla`.  
+The simplest way to achieve this is to remember that a SIF image is just a file, so .. you can transfer it across systems using Linux command line utilities like `scp` or for Windows an SCP client like MobaXterm.
 Just remember that images can be quite large, typically ranging from tens of MBs up to several GBs. For instance the *lolcow* image we created is about 70 MB.
 
 If you want to keep the images publicly available, one option is to host them on the [**Sylabs Cloud Library**](https://cloud.sylabs.io), which is currently free upon signup. You can skip this and just follow the demo, if you don't want to signup.  
