@@ -71,11 +71,13 @@ From: ubuntu:18.04
 > You won't be able to elevate privileges using sudo, please read through to the remote building section and setup a cloud.sylabs.io account in order to perform remote builds.
 {: .callout}
 
-Let us build the image and run it first, then we'll comment on the contents of the def file. To this end we're using `sudo singularity build`, followed by the filename we decide to attribute to the container image, and then by the filename of the def file to be used:
+If you are on a machine where you have sudo permission, you can build a container using the command `sudo singularity build`, followed by the filename we decide to attribute to the container image, and then by the filename of the def file to be used:
 
 ```
 sudo singularity build lolcow.sif lolcow.def
 ```
+
+
 {: .bash}
 
 ```
@@ -91,6 +93,12 @@ INFO:    Creating SIF file...
 INFO:    Build complete: lolcow.sif
 ```
 {: .output}
+
+However, if you are following along on Mahuika you can take a copy of the image with
+
+```
+cp $SIFPATH/lolcow.sif .
+```
 
 Now, let us try and use the container simply as an executable:
 
@@ -116,8 +124,6 @@ You will get something similar to this, hopefully just more colourful:
                 ||     ||
 ```
 {: .output}
-
-Great, we've just containerised a cow that cites novelists! How did we achieve this?
 
 The first line is `BootStrap: docker`.  
 This tells Singularity how the image has to be initialised. `docker` means that we are going to start with a base image from Docker Hub. Another common way to bootstrap is using `library`, which will grab an image from the Sylabs Cloud. The image is specified in the next line, in this case `From: ubuntu:18.04`.  
@@ -186,6 +192,7 @@ singularity inspect --deffile lolcow.sif
 ```
 {: .bash}
 
+The full documentation for definition files can be found [here](https://sylabs.io/guides/3.6/user-guide/definition_files.html).
 
 > ## Use the newly created container
 >
