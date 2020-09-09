@@ -241,7 +241,7 @@ gunzip zebrafish.1.protein.faa.gz
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec $SIFPATH/blast_v2.2.31_cv2.sif makeblastdb -in zebrafish.1.protein.faa -dbtype prot
+> > $ singularity exec -B $PWD $SIFPATH/blast_v2.2.31_cv2.sif makeblastdb -in zebrafish.1.protein.faa -dbtype prot
 > > ```
 > > {: .bash}
 > > ```
@@ -282,7 +282,7 @@ cd ../03_blast
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec -B $ERNZ20/demos/03_blast_db $SIFPATH/blast_v2.2.31_cv2.sif blastp -query P04156.fasta -db $ERNZ20/demos/03_blast_db/zebrafish.1.protein.faa -out results.txt
+> > $ singularity exec -B $PWD,$ERNZ20/demos/03_blast_db $SIFPATH/blast_v2.2.31_cv2.sif blastp -query P04156.fasta -db $ERNZ20/demos/03_blast_db/zebrafish.1.protein.faa -out results.txt
 > > ```
 > > {: .bash}
 > {: .solution}
