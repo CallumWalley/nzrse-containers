@@ -53,13 +53,13 @@ There are a few noteworthy features:
 
 The container can be easily built by pasting the above definition in `dask-mpi.def` and running
 ```
-$ sudo singularity build dask-mpi_latest.sif dask-mpi.def
+sudo singularity build dask-mpi_latest.sif dask-mpi.def
 ```
 {: .bash}
 
 on a machine with root privileges, or using the remote builder service,
 ```
-$ singularity build -r dask-mpi_latest.sif dask-mpi.def
+singularity build -r dask-mpi_latest.sif dask-mpi.def
 ```
 {: .bash}
 
@@ -67,13 +67,13 @@ if you have set up an account - don't forget to log in first via `singularity re
 
 If you cannot build the container yourself, you can download it using
 ```
-$ singularity pull --dir $SIFPATH library://wolfganghayek/default/dask-mpi:latest
+singularity pull --dir $SIFPATH library://wolfganghayek/default/dask-mpi:latest
 ```
 {: .bash}
 
 Once the image is available, try it out:
 ```
-$ singularity run $SIFPATH/dask-mpi_latest.sif
+singularity run $SIFPATH/dask-mpi_latest.sif
 ```
 {: .bash}
 
@@ -91,7 +91,7 @@ Exit from the session using Python's `exit()` command.
 
 Container behaviour is as requested - remember that we asked Singularity to load our `daskenv` environment and launch Python. We can pass command line arguments to Python as well:
 ```
-$ singularity run $SIFPATH/dask-mpi_latest.sif --version
+singularity run $SIFPATH/dask-mpi_latest.sif --version
 ```
 {: .bash}
 
@@ -108,15 +108,15 @@ We are now all set to try out Dask-MPI in a container. Similar to the OpenFOAM-M
 The following command will send job script `mpi_ernz20.sh` off to the Slurm scheduler and run the sample application:
 
 ```
-$ cd $ERNZ20/demos/13_dask
-$ sbatch mpi_ernz20.sh
+cd $ERNZ20/demos/13_dask
+sbatch mpi_ernz20.sh
 ```
 {: .bash}
 
 The job should only take a few seconds. When it has finished, check the Slurm log file - it should contain output similar to
 
 ```
-$ cat slurm*.out
+cat slurm*.out
 ```
 {: .bash}
 
