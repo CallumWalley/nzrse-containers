@@ -1,0 +1,78 @@
+# markdown-spellcheck spelling configuration file
+# Format - lines beginning # are comments
+# global dictionary is at the start, file overrides afterwards
+# one word per line, to define a file override use ' - filename'
+# where filename is relative to this configuration file
+NeSI
+pwd
+dir
+cwd
+bioinformaticians
+FASTA
+zebrafish
+cd
+GIS
+RStudio
+Jupyter
+Dockerfile
+HPC
+Sarus
+Charliecloud
+Enroot
+Nvidia's
+Podman
+sudo
+Centos
+Mahuika
+Sylabs
+SingularityHub
+scp
+MobaXterm
+MBs
+GBs
+CUDA
+MPI
+ABI
+Pawsey
+MPICH
+SciPy
+jupyter
+Slurm
+Conda
+dask-mpi
+Dask
+backends
+IO
+HPCs
+mpi4py
+Miniconda
+daskenv
+conda
+Māui
+ancil
+mpirun
+Gromacs
+Nvidia
+NGC
+tidyverse
+JupyterLab
+ - 03-bio-example-mounts.md
+callout
+BioContainers
+prion
+ - 04-build-intro.md
+callout
+SIF
+lolcow
+tensorflow-notebook
+tidyverse
+r-ver
+rstudio
+ - 05-mpi-dask.md
+callout
+OpenFOAM-MPI
+ - 06-gpu-gromacs.md
+callout
+ - 07-gui-rstudio.md
+callout
+rserver
