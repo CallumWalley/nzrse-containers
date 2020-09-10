@@ -17,7 +17,7 @@ keypoints:
 
 R is a popular language in several domains of science, mostly because of its statistical packages. In particular it is nowadays highly common in data science and bioinformatics.
 
-The group [Rocker](https://hub.docker.com/r/rocker) has published a large number of R images we can use, including an Rstudio image.  To begin, let's cd into the appropriate directory:
+The group [Rocker](https://hub.docker.com/r/rocker) has published a large number of R images we can use, including an RStudio image.  To begin, let's cd into the appropriate directory:
 
 ```
 cd $ERNZ20/demos/08_rstudio
@@ -32,7 +32,7 @@ cd $ERNZ20/demos/08_rstudio
 > > ## Solution
 > >
 > > ```
-> > $ singularity pull docker://rocker/tidyverse:3.6.1
+> > singularity pull docker://rocker/tidyverse:3.6.1
 > > ```
 > > {: .bash}
 > {: .solution}
@@ -46,7 +46,7 @@ To begin with, we are going to run a minimalistic example taken from the worksho
 Let us start with running the R script through the R container; we're going to compute average values in this example:
 
 ```
-singularity exec tidyverse_3.6.1.sif Rscript readings-density.R --mean inflammation-density.png data/inflammation-*.csv
+singularity exec -B $PWD cd $PWD;tidyverse_3.6.1.sif Rscript readings-density.R --mean inflammation-density.png data/inflammation-*.csv
 ```
 {: .bash}
 
@@ -124,7 +124,7 @@ Then we can use RStudio!
 In the R console, submit the analysis script we ran earlier on from the shell:
 
 ```
-> source("readings-density.R")
+source("readings-density.R")
 ```
 {: .r}
 
@@ -171,7 +171,7 @@ Basically, we're starting from the `tidyverse` Docker image we used above, and t
 > > ## Solution
 > >
 > > ```
-> > $ sudo singularity build tidyverse_long.sif tidyverse_long.def
+> > sudo singularity build tidyverse_long.sif tidyverse_long.def
 > > ```
 > > {: .bash}
 > {: .solution}

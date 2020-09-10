@@ -4,7 +4,12 @@ teaching: 10
 exercises: 0
 questions:
 objectives:
-- Learn what are containers and how they are beneficial to HPC & Cloud computing
+- Define containers
+- Learn how containers are beneficial to HPC & Cloud computing
+- Discuss when you would benefit from using containers in your workflow
+keypoints:
+- Containers enable you to package up an application and its dependencies
+- By using containers, you can better enforce reproducibility, portability and share-ability of your computational workflows
 ---
 
 
@@ -44,7 +49,7 @@ A few examples of how containers are used at NeSI:
 * Python apps in climate and earth systems
 * GIS data-processing workflows
 * RStudio & Jupyter Notebook sessions
-* Webservers
+* Web servers
 * Desktop environments
 
 Here's an overview of what a typical workflow looks like:
@@ -78,6 +83,6 @@ A number of tools are available to create, deploy and run containerised applicat
 
 * **Charliecloud**: a Docker-compatible tool for lightweight, user-defined software stacks for high-performance computing.
 
-* **Enroot**: Nvidia's take on containers, a simple, yet powerful tool to turn traditional container/OS images into unprivileged sandbox    es.
+* **Enroot**: Nvidia's take on containers, a simple, yet powerful tool to turn traditional container/OS images into unprivileged sandboxes.
 
 * **Podman**: a root-less alternative to Docker. Misses on some features for HPC.

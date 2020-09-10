@@ -4,16 +4,20 @@ teaching: 15
 exercises: 15
 questions:
 objectives:
-- Learn how to download and run images
+- Download container images
+- Run commands from inside a container
+- Discuss some popular image registries
 keypoints:
 - Singularity can run both Singularity and Docker container images
 - Execute commands in containers with `singularity exec`
 - Open a shell in a container with `singularity shell`
 - Download a container image in a selected location with `singularity pull`
+- You should not use the `latest` tag, as it may limit workflow reproducibility
+- The most commonly used registries are Docker Hub, Quay, Biocontainers and Nvidia GPU Cloud
 ---
 
 
-> ## eRNZ20 attendees only: let's login
+> ## NZ RSE 2020 attendees: let's login
 >
 > Assuming you have followed NeSI's support [documentation](https://support.nesi.org.nz/hc/en-gb/sections/360000034315) on setting passwords and [configuring local SSH client software](https://support.nesi.org.nz/hc/en-gb/articles/360001016335-Choosing-and-Configuring-Software-for-Connecting-to-the-Clusters) then you should login to Mahuika, e.g., using a [standard terminal configuration](https://support.nesi.org.nz/hc/en-gb/articles/360000625535):
 > `ssh mahuika`
@@ -34,15 +38,15 @@ cd /nesi/nobackup/nesi99991/${USER}
 If it does not exist already, download the following Github repo. Then `cd` into it, define a couple of handy variables (see below), and finally `cd` into `demos/02_singularity`:
 
 ```
-git clone https://github.com/nesi/ernz20-containers
-cd ernz20-containers
-export ERNZ20=$(pwd)
-export SIFPATH=$ERNZ20/demos/sif
+git clone https://github.com/nesi/nzrse-containers
+cd nzrse-containers
+export NZRSE=$(pwd)
+export SIFPATH=$NZRSE/demos/sif
 cd demos/02_singularity
 ```
 {: .bash}
 
-We also need to initialise your environment to make Singularity available. NeSI maintains up-to-date versions of Singularity as software modules on Mahuika. Load the latest Singularity and check the version. Note that the `singularity` command includes extensive self-documentation::
+We also need to initialise your environment to make Singularity available. NeSI maintains up-to-date versions of Singularity as software modules on Mahuika. Load the latest Singularity and check the version. Note also that the `singularity` command includes extensive self-documentation::
 
 ```
 module load Singularity
@@ -51,12 +55,12 @@ singularity help
 ```
 {: .bash}
 
-> ## eRNZ20 attendees only: cached images
+> ## NZ RSE attendees only: cached images
 >
-> For the ERNZ20 tutorial we have prepared some of the bigger images to be downloaded in a specific directory - `/nesi/nobackup/nesi99991/ernz20-containers/demos/sif/`. Create the following symbolic link to be able to use them. Normally downloading the required images will take up to an hour.
+> For the NZ RSE tutorial we have prepared some of the bigger images to be downloaded in a specific directory - `/nesi/nobackup/nesi99991/nzrse-containers/demos/sif/`. Create the following symbolic link to be able to use them. Normally downloading the required images will take up to an hour.
 >
 > ```
-> $ ln -s /nesi/nobackup/nesi99991/ernz20-containers/demos/sif $SIFPATH
+> $ ln -s /nesi/nobackup/nesi99991/nzrse-containers/demos/sif $SIFPATH
 > ```
 > {: .bash}
 >
@@ -70,37 +74,6 @@ singularity help
 > salloc: Granted job allocation 10179453
 > salloc: Waiting for resource configuration
 > salloc: Nodes wbn027 are ready for job
-> ```
-> {: .output}
->
-> See NeSI's support docs on [Slurm Interactive Sessions](https://support.nesi.org.nz/hc/en-gb/articles/360001316356) for further info.
-{: .callout}
-
-
-> ## Regular users of this tutorial: read this instead
->
-> Open a second terminal in the machine where you're running the tutorial, then run the script `pull_big_images.sh` to start downloading a few images that you'll require later:
->
-> ```
-> $ export ERNZ20=~/ernz20-containers
-> $ export SIFPATH=$ERNZ20/demos/sif
-> $ bash $ERNZ20/demos/pull_big_images.sh
-> ```
-> {: .bash}
->
-> This could take an hour or more. Meanwhile, you'll be able to keep on going with this episode in your main terminal window.
->
-> One more thing: if you're running this tutorial on a shared HPC system (*e.g.* on NeSI's Mahuika cluster), you should use one of the compute nodes rather than the login node. You can get this setup by using an interactive scheduler allocation, for instance on Mahuika with Slurm:
->
-> ```
-> $ salloc --job-name="SingularityTutorial" --ntasks=4 --time=4:00:00
-> ```
-> {: .bash}
->
-> ```
-> salloc: Granted job allocation 3453895
-> salloc: Waiting for resource configuration
-> salloc: Nodes z052 are ready for job
 > ```
 > {: .output}
 >
@@ -283,7 +256,7 @@ singularity shell library://ubuntu:18.04
 {: .bash}
 
 ```
-Singularity ubuntu_18.04.sif:/home/ubuntu/ernz20-containers/demos/02_singularity>
+Singularity ubuntu_18.04.sif:/home/ubuntu/nzrse-containers/demos/02_singularity>
 ```
 {: .output}
 
@@ -398,7 +371,7 @@ Similarly, if you have a preferred location to pull images into you can avoid us
 If you are running out of disk space, you can inspect the cache with this command (add `-v` from Singularity version 3.4 on):
 
 ```
-singularity cache list
+singularity cache list -v
 ```
 {: .bash}
 

@@ -17,7 +17,7 @@ keypoints:
 Let's start and `cd` into the root demo directory:
 
 ```
-cd $ERNZ20/demos
+cd $NZRSE/demos
 ```
 {: .bash}
 
@@ -58,7 +58,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > {: .bash}
 >
 > ```
-> /nesi/nobackup/nesi99991/${USER}/ernz20-containers/demos
+> /nesi/nobackup/nesi99991/${USER}/nzrse-containers/demos
 > ```
 > {: .output}
 >
@@ -82,7 +82,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 
 > ## Can we see the content of the current directory inside the container?
 >
-> Not by default. Although this was the default behaviour with previous Singularity versions, Singularity v3.6 or above will neither recreate the currnt working directory (CWD) path inside container nor reolve any symlinks in CWD path to determine the destination path inside container. If so, what is the default path it refers to ?
+> Not by default. Although this was the default behaviour with previous Singularity versions, Singularity v3.6 or above will neither recreate the current working directory (CWD) path inside container nor resolve any symlinks in CWD path to determine the destination path inside container. If so, what is the default path it refers to ?
 >
 > > ## Solution
 > >
@@ -190,7 +190,7 @@ ls $SIFPATH/blast*
 {: .bash}
 
 ```
-/nesi/nobackup/nesi99991/bbet740/ernz20-containers/demos/sif/blast_v2.2.31_cv2.sif
+/nesi/nobackup/nesi99991/bbet740/nzrse-containers/demos/sif/blast_v2.2.31_cv2.sif
 ```
 {: .output}
 
@@ -221,7 +221,7 @@ ls $SIFPATH/blast*
 Now, the `demos/03_blast` demo directory contains a human prion FASTA sequence, `P04156.fasta`, whereas another directory, `demos/03_blast_db`, contains a gzipped reference database to blast against, `zebrafish.1.protein.faa.gz`. Let us `cd` to the latter directory and uncompress the database:
 
 ```
-cd $ERNZ20/demos/03_blast_db
+cd $NZRSE/demos/03_blast_db
 gunzip zebrafish.1.protein.faa.gz
 ```
 {: .bash}
@@ -246,7 +246,7 @@ gunzip zebrafish.1.protein.faa.gz
 > > {: .bash}
 > > ```
 > > Building a new DB, current time: 11/16/2019 19:14:43
-> > New DB name:   /home/ubuntu/ernz20-containers/demos/03_blast_db/zebrafish.1.protein.faa
+> > New DB name:   /home/ubuntu/nzrse-containers/demos/03_blast_db/zebrafish.1.protein.faa
 > > New DB title:  zebrafish.1.protein.faa
 > > Sequence type: Protein
 > > Keep Linkouts: T
@@ -273,7 +273,7 @@ cd ../03_blast
 > and then adapt the following command to run into the container:
 >
 > ```
-> $ blastp -query P04156.fasta -db $ERNZ20/demos/03_blast_db/zebrafish.1.protein.faa -out results.txt
+> $ blastp -query P04156.fasta -db $NZRSE/demos/03_blast_db/zebrafish.1.protein.faa -out results.txt
 > ```
 > {: .bash}
 >
@@ -282,7 +282,7 @@ cd ../03_blast
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec -B $PWD,$ERNZ20/demos/03_blast_db $SIFPATH/blast_v2.2.31_cv2.sif blastp -query P04156.fasta -db $ERNZ20/demos/03_blast_db/zebrafish.1.protein.faa -out results.txt
+> > $ singularity exec -B $PWD,$NZRSE/demos/03_blast_db $SIFPATH/blast_v2.2.31_cv2.sif blastp -query P04156.fasta -db $NZRSE/demos/03_blast_db/zebrafish.1.protein.faa -out results.txt
 > > ```
 > > {: .bash}
 > {: .solution}

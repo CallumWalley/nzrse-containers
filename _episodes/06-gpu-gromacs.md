@@ -17,7 +17,7 @@ keypoints:
 > There are examples for both using and not using the Slurm scheduler.
 {: .callout}
 
-> ## ERNZ20 attendees only: let's login to a GPU node
+> ## NZ RSE 2020 attendees only: let's login to a GPU node
 >
 > We'll be skipping this one today sorry, but please read through the example and we'll update this to work on NeSI in future.
 > {: .bash}
