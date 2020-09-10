@@ -47,16 +47,28 @@ However, at NeSI (as at many other HPC centres) we have installed the Nvidia dri
 
 On the host system side, when running GPU applications through Singularity the only requirement consists of the Nvidia driver for the relevant GPU card (the corresponding file is typically called `libcuda.so.<VERSION>`).
 
-Do not execute the next two commands, let us just have a look at them.
+Do not execute the next following commands, let us just have a look at them.
 
+* Setup $SINGULARITY variable as convenience
+  ```
+  SINGULARITY="singularity exec --nv -B ${PWD}:/host_pwd \
+    -B /cm/local/apps/cuda -B ${EBROOTCUDA} --pwd /host_pwd ${SIF}"
+  ```
+  {: .bash}
+* Workaround to ensure Singularity can find the host CUDA libraries
+  ```
+  OLD_PATH=$(${SINGULARITY} printenv | grep LD_LIBRARY_PATH | awk -F= '{print $2}')
+  export SINGULARITYENV_LD_LIBRARY_PATH="${OLD_PATH}:${LD_LIBRARY_PATH}"
+  ```
+  {: .bash}
 * Preliminary step
   ```
-  $ singularity exec --nv $SIFPATH/gromacs_2018.2.sif gmx grompp -f pme.mdp
+  ${SINGULARITY} gmx grompp -f pme.mdp
   ```
   {: .bash}
 * Production step
   ```
-  $ singularity exec --nv $SIFPATH/gromacs_2018.2.sif gmx mdrun -ntmpi 1 -nb gpu -pin on -v -noconfout -nsteps 5000 -s topol.tpr -ntomp 1
+  ${SINGULARITY} gmx mdrun -ntmpi 1 -nb gpu -pin on -v -noconfout -nsteps 5000 -s topol.tpr -ntomp 1
   ```
   {: .bash}
 

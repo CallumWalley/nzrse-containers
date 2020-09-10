@@ -31,4 +31,4 @@ srun ${SINGULARITY} \
 
 # Run Gromacs MD with container
 srun ${SINGULARITY} \
-    gmx mdrun -ntmpi 1 -nb gpu -pin on -v -noconfout -nsteps 5000 -s topol.tpr -ntomp 1
+    gmx mdrun -ntmpi 1 -nb gpu -pin on -v -noconfout -nsteps 1000 -s topol.tpr -ntomp 1
