@@ -30,6 +30,9 @@ This design is what makes Singularity safe to run on HPC: users without admin ri
 
 However, when building a container image you might need to install software using commands that require admin rights, *e.g.* `apt get` in Ubuntu/Debian or `yum` in Centos. To achieve this, you need to run `sudo singularity build`, implying that you need to carry out your build in a machine where you DO have admin rights.
 
+> ## ERNZ20 attendees and those running on a HPC system:
+> You won't be able to elevate privileges using sudo, as such we will be mainly focusing on the use of remote build services.
+{: .callout}
 
 ### Building a basic container
 
@@ -68,16 +71,11 @@ From: ubuntu:18.04
 ```
 {: .source}
 
-> ## ERNZ20 attendees and those running on a HPC system:
-> You won't be able to elevate privileges using sudo, please read through to the remote building section and setup a cloud.sylabs.io account in order to perform remote builds.
-{: .callout}
-
 If you are on a machine where you have sudo permission, you can build a container using the command `sudo singularity build`, followed by the filename we decide to attribute to the container image, and then by the filename of the def file to be used:
 
 ```
 sudo singularity build lolcow.sif lolcow.def
 ```
-
 
 {: .bash}
 
@@ -95,10 +93,10 @@ INFO:    Build complete: lolcow.sif
 ```
 {: .output}
 
-However, if you are following along on Mahuika you can use the container at the path
+However, if you are following along on Mahuika you can take a copy of the container with:
 
 ```
-$SIFPATH/lolcow.sif
+cp $SIFPATH/lolcow.sif .
 ```
 
 Now, let us try and use the container simply as an executable:
@@ -127,7 +125,7 @@ You will get something similar to this, hopefully just more colourful:
 {: .output}
 
 The first line is `BootStrap: docker`.  
-This tells Singularity how the image has to be initialised. `docker` means that we are going to start with a base image from Docker Hub. Another common way to bootstrap is using `library`, which will grab an image from the Sylabs Cloud. The image is specified in the next line, in this case `From: ubuntu:18.04`.  
+This tells Singularity how the image has to be initialised. `docker` means that we are going to start with a base image from Docker Hub. You can also bootstrap from Syslab Cloud with `library`, SingularityHub with `shub` or `localimage` to use a base image your machine. The image is specified in the next line, in this case `From: ubuntu:18.04`.  
 Note how we started from Ubuntu 18.04 in Docker Hub, not Sylabs Cloud, as the former version has got a bit of a richer, more useful configuration.
 
 Next is a section that start with the header `%post`. This is basically a sequence of commands to be executed to install packages in the image, in essence the same commands you would use for installation in a Linux box. Here we are ensuring we have an up-to-date list of packages, and then we are installing three Linux utilities.
@@ -286,15 +284,6 @@ The simplest way to achieve this is to remember that a SIF image is just a file,
 Just remember that images can be quite large, typically ranging from tens of MBs up to several GBs. For instance the *lolcow* image we created is about 70 MB.
 
 If you want to keep the images publicly available, you may want to host it on a container registry.
-
-### Container registries
-
-You can pull containers from a registary using the build command also, just use the remote address instead of a `.def` file.
-
-```
-singularity build lolcow.sif library://callum_w/default/lolcow
-```
-There are currently a few different options.
 
 ### Remote build
 
