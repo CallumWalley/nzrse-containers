@@ -46,7 +46,7 @@ To begin with, we are going to run a minimalistic example taken from the worksho
 Let us start with running the R script through the R container; we're going to compute average values in this example:
 
 ```
-singularity exec -B $PWD cd $PWD;tidyverse_3.6.1.sif Rscript readings-density.R --mean inflammation-density.png data/inflammation-*.csv
+singularity exec -B $PWD tidyverse_3.6.1.sif Rscript readings-density.R --mean inflammation-density.png data/inflammation-*.csv
 ```
 {: .bash}
 
@@ -69,57 +69,16 @@ We even got a nice plot file out of the analysis, `inflammation-density.png`. So
 
 Beside developing R container images, Rocker has also some useful documentation on [Running Rocker R container with Singularity](https://www.rocker-project.org/use/singularity/). Let's set this up together.
 
-The Rocker documentation page suggests that an appropriate command to spawn the RStudio server is (do not run it, yet, we'll do it from the container):
-
-```
-rserver --www-port 8787 --www-address 0.0.0.0 --auth-none=0  --auth-pam-helper-path=pam-helper
-```
-{: .bash}
-
-Here, we're saying we want the web server to listen to port 8787 on any IP address (0.0.0.0), and then we're using another two flags to configure the authenticator.
-
-
-> ## Communication ports
->
-> In order to be able to use the web server, you need to ensure that the machine you are running Singularity from has opened the communication port you're using, in this case `8787`.  
-> In cloud virtual machines this will typically involve some setup in the system dashboard.  
-> If you're running on a HPC system then you'll need to configure some sort of port forwarding. NeSI has some documentation covering this for [JupyterLab](https://support.nesi.org.nz/hc/en-gb/articles/360001093315-JupyterLab), which you can use for this tutorial.
-{: .callout}
-
-
-Do we need more? Yes, we need to ensure we know the username and password for authenticating; *rserver* will configure them based on the values of the environment variables `USER` and `PASSWORD`; normally we would pick a random string for the latter. Today we'll use 'password'.
-
-```
-export PASSWORD=password
-echo $USER && echo $PASSWORD
-```
-{: .bash}
-
 Lastly, containers are read-only, but RStudio will want to be able to write configuration and temporary files in the home. Let us bind mount the current work directory as the container home.  
-There's a little caveat here, in that the actual username in the RStudio server will be `rstudio` if the host user has ID equal to 1000 (first user in the system), and it will instead be the same as the host `$USER` otherwise. Let us code these conditions as follows:
 
 ```
-export R_USER=$USER && [ "$(id -u)" == "1000" ] && export R_USER=rstudio
-```
-{: .bash}
 
-Now we have everything we need to put together the Singularity idiomatic way to launch an interactive RStudio web server:
-
-```
-export PASSWORD=password
-echo $USER && echo $PASSWORD
-export R_USER=$USER && [ "$(id -u)" == "1000" ] && export R_USER=rstudio
-
-singularity exec -c -B $(pwd):/home/$R_USER tidyverse_3.6.1.sif rserver --www-port 8787 --www-address 0.0.0.0 --auth-none=0 --auth-pam-helper-path=pam-helper
+singularity exec -c -B $PWD tidyverse_3.6.1.sif rserver --www-port 8787 --www-address 0.0.0.0 --auth-none=1 --auth-validate-users=0
 ```
 {: .bash}
 
 Note the `-c` flag for `singularity exec`, used to avoid sharing directories such as `/tmp` with the host, and thus to better clean up the session upon exit.  
 If everything is fine, no output will be printed.
-
-Now, open your web browser, and type as URL `<Singularity machine IP Address>:8787`.  
-Use `$USER` and `$PASSWORD` as printed by the commands above to fill the credential fields.  
-Then we can use RStudio!
 
 In the R console, submit the analysis script we ran earlier on from the shell:
 
@@ -156,8 +115,8 @@ From: rocker/tidyverse:3.6.1
 %startscript
   export R_PORT=${R_PORT:-"8787"}
   export R_ADDRESS=${R_ADDRESS:-"0.0.0.0"}
-
-  rserver --www-port $R_PORT --www-address $R_ADDRESS --auth-none=0 --auth-pam-helper-path=pam-helper
+  
+  rserver --www-port $R_PORT --www-address $R_ADDRESS --auth-none=1 --auth-validate-users=0
 ```
 {: .source}
 
@@ -171,7 +130,7 @@ Basically, we're starting from the `tidyverse` Docker image we used above, and t
 > > ## Solution
 > >
 > > ```
-> > sudo singularity build tidyverse_long.sif tidyverse_long.def
+> > singularity build -r tidyverse_long.sif tidyverse_long.def
 > > ```
 > > {: .bash}
 > {: .solution}
