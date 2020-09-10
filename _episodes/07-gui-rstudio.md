@@ -20,7 +20,7 @@ R is a popular language in several domains of science, mostly because of its sta
 The group [Rocker](https://hub.docker.com/r/rocker) has published a large number of R images we can use, including an RStudio image.  To begin, let's cd into the appropriate directory:
 
 ```
-cd $ERNZ20/demos/08_rstudio
+cd $NZRSE/demos/08_rstudio
 ```
 {: .bash}
 
