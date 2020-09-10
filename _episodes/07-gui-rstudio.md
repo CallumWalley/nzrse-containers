@@ -32,7 +32,7 @@ cd $ERNZ20/demos/08_rstudio
 > > ## Solution
 > >
 > > ```
-> > $ singularity pull docker://rocker/tidyverse:3.6.1
+> > singularity pull docker://rocker/tidyverse:3.6.1
 > > ```
 > > {: .bash}
 > {: .solution}
@@ -124,7 +124,7 @@ Then we can use RStudio!
 In the R console, submit the analysis script we ran earlier on from the shell:
 
 ```
-> source("readings-density.R")
+source("readings-density.R")
 ```
 {: .r}
 
@@ -171,7 +171,7 @@ Basically, we're starting from the `tidyverse` Docker image we used above, and t
 > > ## Solution
 > >
 > > ```
-> > $ sudo singularity build tidyverse_long.sif tidyverse_long.def
+> > sudo singularity build tidyverse_long.sif tidyverse_long.def
 > > ```
 > > {: .bash}
 > {: .solution}
