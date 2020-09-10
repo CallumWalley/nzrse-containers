@@ -139,11 +139,7 @@ Basically, we're starting from the `tidyverse` Docker image we used above, and t
 Once the container image is build, let's use it to start an instance via `singularity instance start`. Note how the other options are the same as in the interactive session above; the only addition is the specification of a name for the instance, `myserver` in this case, that has to follow the image name:
 
 ```
-export PASSWORD=password
-echo $USER && echo $PASSWORD
-export R_USER=$USER && [ "$(id -u)" == "1000" ] && export R_USER=rstudio
-
-singularity instance start -c -B $(pwd):/home/$R_USER tidyverse_long.sif myserver
+singularity instance start -c -B $PWD tidyverse_long.sif myserver
 ```
 {: .bash}
 
@@ -168,7 +164,7 @@ myserver         18080    /home/ubuntu/ernz20-containers/demos/08_rstudio/tidyve
 Note that we can run commands from the instance by referring to it as `instance://<INSTANCE-NAME>`, *e.g.*
 
 ```
-singularity exec instance://myserver echo $USER $PASSWORD
+singularity exec instance://myserver echo $USER
 ```
 {: .bash}
 
