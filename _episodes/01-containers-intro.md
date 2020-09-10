@@ -4,7 +4,12 @@ teaching: 10
 exercises: 0
 questions:
 objectives:
-- Learn what are containers and how they are beneficial to HPC & Cloud computing
+- Define containers
+- Learn how containers are beneficial to HPC & Cloud computing
+- Discuss when you would benefit from using containers in your workflow
+keypoints:
+- Containers enable you to package up an application and its dependencies
+- By using containers, you can better enforce reproducibility, portability and share-ability of your computational workflows
 ---
 
 
