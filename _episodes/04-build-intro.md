@@ -30,7 +30,7 @@ This design is what makes Singularity safe to run on HPC: users without admin ri
 
 However, when building a container image you might need to install software using commands that require admin rights, *e.g.* `apt get` in Ubuntu/Debian or `yum` in Centos. To achieve this, you need to run `sudo singularity build`, implying that you need to carry out your build in a machine where you DO have admin rights.
 
-> ## ERNZ20 attendees and those running on a HPC system:
+> ## NZ RSE 2020 attendees and those running on a HPC system:
 > You won't be able to elevate privileges using sudo, as such we will be mainly focusing on the use of remote build services.
 {: .callout}
 
@@ -42,7 +42,7 @@ This example is adapted from this well crafted [Singularity Tutorial](https://gi
 Let us cd into the appropriate directory:
 
 ```
-cd $ERNZ20/demos/06_lolcow
+cd $NZRSE/demos/06_lolcow
 ```
 {: .bash}
 
@@ -125,7 +125,7 @@ You will get something similar to this, hopefully just more colourful:
 {: .output}
 
 The first line is `BootStrap: docker`.  
-This tells Singularity how the image has to be initialised. `docker` means that we are going to start with a base image from Docker Hub. You can also bootstrap from Syslab Cloud with `library`, SingularityHub with `shub` or `localimage` to use a base image your machine. The image is specified in the next line, in this case `From: ubuntu:18.04`.  
+This tells Singularity how the image has to be initialised. `docker` means that we are going to start with a base image from Docker Hub. You can also bootstrap from Sylabs Cloud with `library`, SingularityHub with `shub` or `localimage` to use a base image your machine. The image is specified in the next line, in this case `From: ubuntu:18.04`.  
 Note how we started from Ubuntu 18.04 in Docker Hub, not Sylabs Cloud, as the former version has got a bit of a richer, more useful configuration.
 
 Next is a section that start with the header `%post`. This is basically a sequence of commands to be executed to install packages in the image, in essence the same commands you would use for installation in a Linux box. Here we are ensuring we have an up-to-date list of packages, and then we are installing three Linux utilities.
@@ -224,9 +224,9 @@ The full documentation for definition files can be found [here](https://sylabs.i
 > > {: .bash}
 > >
 > > ```
-> > Singularity lolcow.sif:/home/ubuntu/ernz20-containers/demos/06_lolcow> ls
+> > Singularity lolcow.sif:/home/ubuntu/nzrse-containers/demos/06_lolcow> ls
 > > lolcow.def  lolcow.sif
-> > Singularity lolcow.sif:/home/ubuntu/ernz20-containers/demos/06_lolcow>
+> > Singularity lolcow.sif:/home/ubuntu/nzrse-containers/demos/06_lolcow>
 > > ```
 > > {: .output}
 > >
@@ -260,7 +260,7 @@ There's one section of the def file we haven't commented on yet. `%runscript` al
 Or, if you need to specify Singularity runtime flags, *e.g.*:
 
 ```
-singularity run -B $ERNZ20/_episodes lolcow.sif
+singularity run -B $NZRSE/_episodes lolcow.sif
 ```
 {: .bash}
 
@@ -289,7 +289,7 @@ If you want to keep the images publicly available, you may want to host it on a 
 
 What if you need to build an image from a system where you don't have admin privileges, *i.e.* you can't run commands with *sudo*?
 
-Singularity offers the option to run build remotely, using a **Remote Builder** we will be using the default provided by Syslab; You will need a Sylabs account and a token to use this feature.
+Singularity offers the option to run build remotely, using a **Remote Builder** we will be using the default provided by Sylabs; You will need a Sylabs account and a token to use this feature.
 
 ```
 singularity remote login
