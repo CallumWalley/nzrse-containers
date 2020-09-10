@@ -2,7 +2,12 @@
 #SBATCH --job-name=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --ntasks=1
-#SBATCH --time=01:00:00
+#SBATCH --mem=1G
+#SBATCH --time=00:15:00
+#SBATCH --export=SIFPATH
+
+# so that the srun's below don't inhert --export=
+export SLURM_EXPORT_ENV=ALL
 
 # load environment modules
 module load Singularity CUDA
