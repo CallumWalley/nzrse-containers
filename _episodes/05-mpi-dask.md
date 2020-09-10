@@ -22,7 +22,7 @@ keypoints:
 
 ### Conda environments inside a container
 
-We will be using Dask-MPI in this lesson, an MPI-based variant of the popular Dask package for parallel processing in Python. Dask comes with a variety of parallelisation backends, such as mulitprocessing or multithreading, but bundling it with MPI enables users to benefit from the extensive memory and IO resources of computer clusters and High-Performance Computers (HPCs).
+We will be using Dask-MPI in this lesson, an MPI-based variant of the popular Dask package for parallel processing in Python. Dask comes with a variety of parallelisation backends, such as multiprocessing or multithreading, but bundling it with MPI enables users to benefit from the extensive memory and IO resources of computer clusters and High-Performance Computers (HPCs).
 
 Dask-MPI is most easily installed using the Conda package manager, which can automatically provide an MPI distribution, such as Intel MPI, and dependency packages such as mpi4py. Conda environments enable users to assemble a minimal set of packages that are needed for a given application, reducing complexity of the work environment and enhancing its robustness.
 

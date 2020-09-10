@@ -17,7 +17,7 @@ keypoints:
 
 R is a popular language in several domains of science, mostly because of its statistical packages. In particular it is nowadays highly common in data science and bioinformatics.
 
-The group [Rocker](https://hub.docker.com/r/rocker) has published a large number of R images we can use, including an Rstudio image.  To begin, let's cd into the appropriate directory:
+The group [Rocker](https://hub.docker.com/r/rocker) has published a large number of R images we can use, including an RStudio image.  To begin, let's cd into the appropriate directory:
 
 ```
 cd $ERNZ20/demos/08_rstudio

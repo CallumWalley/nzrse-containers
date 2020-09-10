@@ -82,7 +82,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 
 > ## Can we see the content of the current directory inside the container?
 >
-> Not by default. Although this was the default behaviour with previous Singularity versions, Singularity v3.6 or above will neither recreate the currnt working directory (CWD) path inside container nor reolve any symlinks in CWD path to determine the destination path inside container. If so, what is the default path it refers to ?
+> Not by default. Although this was the default behaviour with previous Singularity versions, Singularity v3.6 or above will neither recreate the current working directory (CWD) path inside container nor resolve any symlinks in CWD path to determine the destination path inside container. If so, what is the default path it refers to ?
 >
 > > ## Solution
 > >
