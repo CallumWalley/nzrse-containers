@@ -46,7 +46,7 @@ To begin with, we are going to run a minimalistic example taken from the worksho
 Let us start with running the R script through the R container; we're going to compute average values in this example:
 
 ```
-singularity exec tidyverse_3.6.1.sif Rscript readings-density.R --mean inflammation-density.png data/inflammation-*.csv
+singularity exec -B $PWD cd $PWD;tidyverse_3.6.1.sif Rscript readings-density.R --mean inflammation-density.png data/inflammation-*.csv
 ```
 {: .bash}
 
