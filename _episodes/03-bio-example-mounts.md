@@ -71,11 +71,11 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ```
 > > {: .bash}
 > > ```
-> > /scale_wlg_nobackup/filesets/nobackup/nesi99991/${USER}/ernz20-containers/demos
+> > /home/${USER}
 > > ```
 > > {: .output}
 > >
-> > Host and container working directories coincide! Noting that on NeSI the `/nesi/nobackup/` path is a link, this gets resolved when we start the container. Multiple symlinks in your pwd hierarchy can cause issues, if this happens you'll typically end up with your container pwd in your home dir.
+> > An unexpected result as it is not recognising the current working directory. We will discuss the reason for this in subsequent section. 
 > {: .solution}
 {: .challenge}
 
@@ -96,6 +96,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ```
 > > {: .output}
 > >
+> > Content of `/home/${USER}` shoudl be visible
 > {: .solution}
 {: .challenge}
 
@@ -116,7 +117,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ```
 > > {: .output}
 > >
-> > Typically, host directories external to the current directory are not visible! Though in some cases Singularity may be configured system-wide to ensure key shared storage is available by default. Assuming this path isn't visible in this case, how can we fix this? Read on...
+> > Typically, host directories external to the `/home/${USER}` or current directory (with older versions of Singularity versions) are not visible! Though in some cases Singularity may be configured system-wide to ensure key shared storage is available by default. Assuming this path isn't visible in this case, how can we fix this? Read on...
 > {: .solution}
 {: .challenge}
 
