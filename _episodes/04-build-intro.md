@@ -42,7 +42,7 @@ This example is adapted from this well crafted [Singularity Tutorial](https://gi
 Let us cd into the appropriate directory:
 
 ```
-cd $ERNZ20/demos/06_lolcow
+cd $NZRSE/demos/06_lolcow
 ```
 {: .bash}
 
@@ -224,9 +224,9 @@ The full documentation for definition files can be found [here](https://sylabs.i
 > > {: .bash}
 > >
 > > ```
-> > Singularity lolcow.sif:/home/ubuntu/ernz20-containers/demos/06_lolcow> ls
+> > Singularity lolcow.sif:/home/ubuntu/nzrse-containers/demos/06_lolcow> ls
 > > lolcow.def  lolcow.sif
-> > Singularity lolcow.sif:/home/ubuntu/ernz20-containers/demos/06_lolcow>
+> > Singularity lolcow.sif:/home/ubuntu/nzrse-containers/demos/06_lolcow>
 > > ```
 > > {: .output}
 > >
@@ -260,7 +260,7 @@ There's one section of the def file we haven't commented on yet. `%runscript` al
 Or, if you need to specify Singularity runtime flags, *e.g.*:
 
 ```
-singularity run -B $ERNZ20/_episodes lolcow.sif
+singularity run -B $NZRSE/_episodes lolcow.sif
 ```
 {: .bash}
 
