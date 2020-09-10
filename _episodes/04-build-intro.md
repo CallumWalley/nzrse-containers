@@ -6,9 +6,10 @@ questions:
 objectives:
 - Learn what is a definition file (def file) and its basic syntax
 - Learn how to build a container image and share it with others
+- Learn about container registries and remote build services
 - Learn the pros&cons of building with Singularity vs Docker
 keypoints:
-- Build images using `sudo singularity build`
+- Build images using remote 
 - Use the remote builder with the flag `-r`, if you need to build images from a machine where you don't have sudo rights
 - You can share you Singularity Image File with others, as you would do with any other (big) file
 - Upload images to a web registry with `singularity push` (Sylabs account required)
@@ -29,6 +30,9 @@ This design is what makes Singularity safe to run on HPC: users without admin ri
 
 However, when building a container image you might need to install software using commands that require admin rights, *e.g.* `apt get` in Ubuntu/Debian or `yum` in Centos. To achieve this, you need to run `sudo singularity build`, implying that you need to carry out your build in a machine where you DO have admin rights.
 
+> ## ERNZ20 attendees and those running on a HPC system:
+> You won't be able to elevate privileges using sudo, as such we will be mainly focusing on the use of remote build services.
+{: .callout}
 
 ### Building a basic container
 
@@ -67,15 +71,12 @@ From: ubuntu:18.04
 ```
 {: .source}
 
-> ## ERNZ20 attendees and those running on a HPC system:
-> You won't be able to elevate privileges using sudo, please read through to the remote building section and setup a cloud.sylabs.io account in order to perform remote builds.
-{: .callout}
-
-Let us build the image and run it first, then we'll comment on the contents of the def file. To this end we're using `sudo singularity build`, followed by the filename we decide to attribute to the container image, and then by the filename of the def file to be used:
+If you are on a machine where you have sudo permission, you can build a container using the command `sudo singularity build`, followed by the filename we decide to attribute to the container image, and then by the filename of the def file to be used:
 
 ```
 sudo singularity build lolcow.sif lolcow.def
 ```
+
 {: .bash}
 
 ```
@@ -91,6 +92,12 @@ INFO:    Creating SIF file...
 INFO:    Build complete: lolcow.sif
 ```
 {: .output}
+
+However, if you are following along on Mahuika you can take a copy of the container with:
+
+```
+cp $SIFPATH/lolcow.sif .
+```
 
 Now, let us try and use the container simply as an executable:
 
@@ -117,10 +124,8 @@ You will get something similar to this, hopefully just more colourful:
 ```
 {: .output}
 
-Great, we've just containerised a cow that cites novelists! How did we achieve this?
-
 The first line is `BootStrap: docker`.  
-This tells Singularity how the image has to be initialised. `docker` means that we are going to start with a base image from Docker Hub. Another common way to bootstrap is using `library`, which will grab an image from the Sylabs Cloud. The image is specified in the next line, in this case `From: ubuntu:18.04`.  
+This tells Singularity how the image has to be initialised. `docker` means that we are going to start with a base image from Docker Hub. You can also bootstrap from Syslab Cloud with `library`, SingularityHub with `shub` or `localimage` to use a base image your machine. The image is specified in the next line, in this case `From: ubuntu:18.04`.  
 Note how we started from Ubuntu 18.04 in Docker Hub, not Sylabs Cloud, as the former version has got a bit of a richer, more useful configuration.
 
 Next is a section that start with the header `%post`. This is basically a sequence of commands to be executed to install packages in the image, in essence the same commands you would use for installation in a Linux box. Here we are ensuring we have an up-to-date list of packages, and then we are installing three Linux utilities.
@@ -186,6 +191,7 @@ singularity inspect --deffile lolcow.sif
 ```
 {: .bash}
 
+The full documentation for definition files can be found [here](https://sylabs.io/guides/3.6/user-guide/definition_files.html).
 
 > ## Use the newly created container
 >
@@ -270,17 +276,20 @@ singularity run -B $ERNZ20/_episodes lolcow.sif
 ```
 {: .output}
 
-
 ### Share your container image
 
 Now that you've built your container image, you might want to run it on other systems, or share it with collaborators.
 
-The simplest way to achieve this is to remember that a SIF image is just a file, so .. you can transfer it across systems using Linux command line utilities like `scp` or `rsync`, or even graphical applications such as `Filezilla`.  
+The simplest way to achieve this is to remember that a SIF image is just a file, so .. you can transfer it across systems using Linux command line utilities like `scp` or for Windows an SCP client like MobaXterm.
 Just remember that images can be quite large, typically ranging from tens of MBs up to several GBs. For instance the *lolcow* image we created is about 70 MB.
 
-If you want to keep the images publicly available, one option is to host them on the [**Sylabs Cloud Library**](https://cloud.sylabs.io), which is currently free upon signup. You can skip this and just follow the demo, if you don't want to signup.  
-Once you create an account, you'll need to click on your account name on the top right of the page, select `Access Tokens`, then create a token, and copy it to the clipboard.  
-Then you can configure the machine you're using for building container images, so that you can also push them to the Cloud Library:
+If you want to keep the images publicly available, you may want to host it on a container registry.
+
+### Remote build
+
+What if you need to build an image from a system where you don't have admin privileges, *i.e.* you can't run commands with *sudo*?
+
+Singularity offers the option to run build remotely, using a **Remote Builder** we will be using the default provided by Syslab; You will need a Sylabs account and a token to use this feature.
 
 ```
 singularity remote login
@@ -299,6 +308,35 @@ Now paste the token you had copied to the clipboard end press `Enter`:
 INFO:    API Key Verified!
 ```
 {: .output}
+
+With this set up, you may use `singularity build -r` to start the remote build. Once finished, the image will be downloaded so that it's ready to use:
+
+```
+singularity build -r lolcow_remote.sif lolcow.def
+```
+{: .bash}
+
+```
+INFO:    Remote "default" added.
+INFO:    Authenticating with remote: default
+INFO:    API Key Verified!
+INFO:    Remote "default" now in use.
+INFO:    Starting build...
+[..]
+INFO:    Running post scriptlet
+[..]
+INFO:    Adding help info
+INFO:    Adding labels
+INFO:    Adding environment to container
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: /tmp/image-699539270
+WARNING: Skipping container verifying
+ 67.07 MiB / 67.07 MiB  100.00% 14.18 MiB/s 4s
+```
+{: .output}
+
+At the time of writing, when using the Remote Builder you won't be able to use the `%files` header in the def file, to copy host files into the image.
 
 You are now ready to push your image to the Cloud Library, *e.g.* via `singularity push`:
 
@@ -331,40 +369,9 @@ INFO:    Download complete: lolcow_30oct19.sif
 ```
 {: .output}
 
-
-### Remote build
-
-What if you need to build an image from a system where you don't have admin privileges, *i.e.* you can't run commands with *sudo*?
-
-Singularity offers the option to run build remotely, using the **Sylabs Remote Builder**; once again you will need a Sylabs account and a token to use this feature. If this is the case, just use `singularity build -r` to proceed with the remote build. Once finished, the image will be downloaded so that it's ready to use:
-
 ```
-singularity build -r lolcow_remote.sif lolcow.def
+singularity build lolcow_remote.sif shub://CallumWalley/RSE20_lolcow:lolcow
 ```
-{: .bash}
-
-```
-INFO:    Remote "default" added.
-INFO:    Authenticating with remote: default
-INFO:    API Key Verified!
-INFO:    Remote "default" now in use.
-INFO:    Starting build...
-[..]
-INFO:    Running post scriptlet
-[..]
-INFO:    Adding help info
-INFO:    Adding labels
-INFO:    Adding environment to container
-INFO:    Adding runscript
-INFO:    Creating SIF file...
-INFO:    Build complete: /tmp/image-699539270
-WARNING: Skipping container verifying
- 67.07 MiB / 67.07 MiB  100.00% 14.18 MiB/s 4s
-```
-{: .output}
-
-At the time of writing, when using the Remote Builder you won't be able to use the `%files` header in the def file, to copy host files into the image.
-
 
 ### Other build options
 
@@ -388,21 +395,7 @@ sudo singularity shell --writable playbox/
 
 More information on sandbox images can be found at the [Sylabs docs on building images](https://sylabs.io/guides/3.3/user-guide/build_a_container.html#creating-writable-sandbox-directories).
 
-One last notable feature is the ability to use PGP keys to sign and verify container images. In this way, users of 3rd party containers can double check that the image they're running is bit-by-bit equivalent to the one that the author originally built, largely reducing the possibility to run containers infected by malware. you can find more on this topic at the [Sylabs docs on signing and verifying containers](https://sylabs.io/guides/3.3/user-guide/signNverify.html).
-
-
-### Singularity *vs* Docker builds
-
-We'll discuss how to build an image with Docker in a dedicated episode. For now, let's just point out some of the advantages when building with one or the other tool. This will hopefully inform on which tool is best suited for you, depending on your specific context.
-
-#### Singularity
-* Single file image, can be handled as any other file
-* Ability to sign/verify images
-* Unambiguous container usage modes, via distinct keywords: `exec`, `shell`, `run`, `instance` (see episode on GUI applications)
-
-#### Docker
-* Image format can be run by all existing container engines
-* Layered image format allows caching, for reduced build time during development phase
+One last notable feature is the ability to use PGP keys to sign and verify container images. In this way, users of 3rd party containers can double check that the image they're running is bit-by-bit equivalent to the one that the author originally built, largely reducing the possibility to run containers infected by malware. you can find more on this topic at the [Sylabs docs on signing and verifying containers](https://sylabs.io/guides/3.3/user-guide/signNverify.html). 
 
 
 ### Useful base images
