@@ -19,14 +19,21 @@ keypoints:
 
 > ## NZ RSE 2020 attendees: let's login
 >
-> Assuming you have followed NeSI's support [documentation](https://support.nesi.org.nz/hc/en-gb/sections/360000034315) on setting passwords and [configuring local SSH client software](https://support.nesi.org.nz/hc/en-gb/articles/360001016335-Choosing-and-Configuring-Software-for-Connecting-to-the-Clusters) then you should login to Mahuika, e.g., using a [standard terminal configuration](https://support.nesi.org.nz/hc/en-gb/articles/360000625535):
+> Assuming you have followed the tutorial setup and NeSI's support [documentation](https://support.nesi.org.nz/hc/en-gb/sections/360000034315) on setting passwords etc then you should already have an active NeSI user account with membership in our training project. This will allow you to login to NeSI via our new [JupyterHub service](https://jupyter.nesi.org.nz/) and use a web-based console to work through the tutorial.
+
+Once you've logged into JupyterHub you'll be presented with a screen of options for starting a new server - make selections like so and hit Start.
+
+<!-- ![NeSI JupyterHub Server Launch]({{ page.root }}/fig/nesi_jupyterhub_startserveroptions.png) -->
+<img src="{{ page.root }}/fig/nesi_jupyterhub_startserveroptions" alt="NeSI JupyterHub Server Launch"/>
+
+You can use SSH if you prefer - here are our instructions on [configuring local SSH client software](https://support.nesi.org.nz/hc/en-gb/articles/360001016335-Choosing-and-Configuring-Software-for-Connecting-to-the-Clusters). If you've done this then you should login to Mahuika, e.g., using a [standard terminal configuration](https://support.nesi.org.nz/hc/en-gb/articles/360000625535):
 > `ssh mahuika`
 {: .callout}
 
 
 ### Get ready for the hands-on
 
-Before we start, let us ensure we have got the required files to run the tutorials. We'll create a directory on NeSI's scratch "nobackup" filesystem for you to work in. NB: these files will be removed within a day of the tutorial.
+Before we start, let us ensure we have got the required files to run the tutorials. We'll create a directory on NeSI's scratch "nobackup" filesystem for you to work in. NB: these files will be removed after the tutorial.
 
 ```
 cd ~
