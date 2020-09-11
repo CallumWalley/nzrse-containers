@@ -24,7 +24,7 @@ keypoints:
 Once you've logged into JupyterHub you'll be presented with a screen of options for starting a new server - make selections like so and hit Start.
 
 <!-- ![NeSI JupyterHub Server Launch]({{ page.root }}/fig/nesi_jupyterhub_startserveroptions.png) -->
-<img src="{{ page.root }}/fig/nesi_jupyterhub_startserveroptions" alt="NeSI JupyterHub Server Launch"/>
+<img src="{{ page.root }}/fig/nesi_jupyterhub_startserveroptions.png" alt="NeSI JupyterHub Server Launch"/>
 
 You can use SSH if you prefer - here are our instructions on [configuring local SSH client software](https://support.nesi.org.nz/hc/en-gb/articles/360001016335-Choosing-and-Configuring-Software-for-Connecting-to-the-Clusters). If you've done this then you should login to Mahuika, e.g., using a [standard terminal configuration](https://support.nesi.org.nz/hc/en-gb/articles/360000625535):
 > `ssh mahuika`
