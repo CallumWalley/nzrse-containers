@@ -7,7 +7,6 @@ objectives:
 - Learn what is a definition file (def file) and its basic syntax
 - Learn how to build a container image and share it with others
 - Learn about container registries and remote build services
-- Learn the pros&cons of building with Singularity vs Docker
 keypoints:
 - Build images using remote 
 - Use the remote builder with the flag `-r`, if you need to build images from a machine where you don't have sudo rights
@@ -93,10 +92,10 @@ INFO:    Build complete: lolcow.sif
 ```
 {: .output}
 
-However, if you are following along on Mahuika you can take a copy of the container with:
+However, if you are following along on Mahuika you can run the container with:
 
 ```
-cp $SIFPATH/lolcow.sif .
+$SIFPATH/lolcow.sif
 ```
 
 Now, let us try and use the container simply as an executable:
@@ -369,9 +368,6 @@ INFO:    Download complete: lolcow_30oct19.sif
 ```
 {: .output}
 
-```
-singularity build lolcow_remote.sif shub://CallumWalley/RSE20_lolcow:lolcow
-```
 
 ### Other build options
 
