@@ -11,19 +11,6 @@ keypoints:
 ---
 
 
-> ## Note
->
-> To run exercises from this episode on your own, you'll need a machine with a GPU card and GPU drivers installed.  
-> There are examples for both using and not using the Slurm scheduler.
-{: .callout}
-
-> ## NZ RSE 2020 attendees only: let's login to a GPU node
->
-> We'll be skipping this one today sorry, but please read through the example and we'll update this to work on NeSI in future.
-> {: .bash}
-{: .callout}
-
-
 ### Run a molecular dynamics simulation on a GPU with containers
 
 For our example we are going to use Gromacs, a quite popular molecular dynamics package, among the ones that have been optimised to run on GPUs through Nvidia containers.
@@ -32,7 +19,6 @@ First, let us cd into `demos/05_gromacs`, and ensure that `$SIFPATH` is defined:
 
 ```
 cd $ERNZ20/demos/05_gromacs
-export SIFPATH=$ERNZ20/demos/sif
 ```
 {: .bash}
 
@@ -44,7 +30,7 @@ ls $SIFPATH/gromacs*
 {: .bash}
 
 ```
-/home/ubuntu/ernz20-containers/demos/sif/gromacs_2018.2.sif
+/nesi/nobackup/nesi99991/nzrse-containers/demos/sif/gromacs_2018.2.sif
 ```
 {: .output}
 
@@ -55,20 +41,34 @@ gunzip conf.gro.gz
 ```
 {: .bash}
 
-In theory, all we should need to do from a Singularity perspective to run a GPU application from a container is to add the runtime flag `--nv`. This will make Singularity look for the Nvidia drivers in the host, and mount them inside the container. However, on NeSI we have installed the Nvidia drivers in non-standard locations, so some additional steps are required.
+In theory, all we should need to do from a Singularity perspective to run a GPU application from a container is to add the runtime flag `--nv`. This will make Singularity look for the Nvidia drivers in the host, and mount them inside the container. 
 
-On the host system side, when running GPU applications through Singularity the only requirement consists of the Nvidia driver for the relevant GPU card (the corresponding file is typically called `libcuda.so.<VERSION>` and is located in some library subdirectory of `/usr`).
+However, at NeSI (as at many other HPC centres) we have installed the Nvidia drivers and libraries in non-standard locations, so some additional steps are required.
 
-Do not execute the next two commands, let us just have a look at them.
+On the host system side, when running GPU applications through Singularity the only requirement consists of the Nvidia driver for the relevant GPU card (the corresponding file is typically called `libcuda.so.<VERSION>`).
 
+Do not execute the following commands, let us just have a look at them.
+
+* Setup $SINGULARITY variable as convenience
+  ```
+  SINGULARITY="singularity exec --nv -B ${PWD}:/host_pwd \
+    -B /cm/local/apps/cuda -B ${EBROOTCUDA} --pwd /host_pwd ${SIF}"
+  ```
+  {: .bash}
+* Workaround to ensure Singularity can find the host CUDA libraries
+  ```
+  OLD_PATH=$(${SINGULARITY} printenv | grep LD_LIBRARY_PATH | awk -F= '{print $2}')
+  export SINGULARITYENV_LD_LIBRARY_PATH="${OLD_PATH}:${LD_LIBRARY_PATH}"
+  ```
+  {: .bash}
 * Preliminary step
   ```
-  $ singularity exec --nv $SIFPATH/gromacs_2018.2.sif gmx grompp -f pme.mdp
+  ${SINGULARITY} gmx grompp -f pme.mdp
   ```
   {: .bash}
 * Production step
   ```
-  $ singularity exec --nv $SIFPATH/gromacs_2018.2.sif gmx mdrun -ntmpi 1 -nb gpu -pin on -v -noconfout -nsteps 5000 -s topol.tpr -ntomp 1
+  ${SINGULARITY} gmx mdrun -ntmpi 1 -nb gpu -pin on -v -noconfout -nsteps 5000 -s topol.tpr -ntomp 1
   ```
   {: .bash}
 
@@ -76,11 +76,15 @@ GPU resources are usually made available in HPC systems through schedulers, to w
 
 ```
 #!/bin/bash -l
-
 #SBATCH --job-name=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --ntasks=1
-#SBATCH --time=01:00:00
+#SBATCH --mem=1G
+#SBATCH --time=00:15:00
+#SBATCH --export=SIFPATH
+
+# so that the srun's below don't inhert --export=
+export SLURM_EXPORT_ENV=ALL
 
 # load environment modules
 module load Singularity CUDA
@@ -108,20 +112,21 @@ srun ${SINGULARITY} \
 ```
 {: .bash}
 
-Basically, we have just combined the Slurm command `srun` with `singularity run <..>`, with a few additional steps to enable Singularity to locate the Nvidia drivers and libraries on the host. We can submit the script with:
+Basically, we have just combined the Slurm command `srun` with `singularity exec <..>`, with a few additional steps to enable Singularity to locate the Nvidia drivers and libraries on the host. We can submit the script with:
 
 ```
-sbatch gpu.sh
+sbatch --account=nesi99991 --reservation=jupyter gpu.sh
 ```
 {: .bash}
 
 
 > ## Running this example on NeSI
 >
-> If you try and run this on *Mahuika* at NeSI,
-> You might also want to edit the submission command as follows:
+> The job will take a few minutes to complete and we only have
+> a couple of GPUs available for this workshop, so you may wait in the
+> queue for a while. Check your job status with:
 > ```
-> $ sbatch --account=<your-nesi-project> gpu.sh
+> $ squeue -u $USER
 > ```
 > {: .bash}
 {: .callout}
