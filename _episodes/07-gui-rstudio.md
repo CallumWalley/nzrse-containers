@@ -20,7 +20,7 @@ R is a popular language in several domains of science, mostly because of its sta
 The group [Rocker](https://hub.docker.com/r/rocker) has published a large number of R images we can use, including an RStudio image.  To begin, let's cd into the appropriate directory:
 
 ```
-cd $NZRSE/demos/08_rstudio
+cd $NZRSE/demos/07_rstudio
 ```
 {: .bash}
 
@@ -157,7 +157,7 @@ singularity instance list
 
 ```
 INSTANCE NAME    PID      IMAGE
-myserver         18080    /home/ubuntu/ernz20-containers/demos/08_rstudio/tidyverse_long.sif
+myserver         18080    /home/ubuntu/ernz20-containers/demos/07_rstudio/tidyverse_long.sif
 ```
 {: .output}
 
@@ -176,6 +176,6 @@ singularity instance stop myserver
 {: .bash}
 
 ```
-Stopping myserver instance of /home/ubuntu/ernz20-containers/demos/08_rstudio/tidyverse_long.sif (PID=18080)
+Stopping myserver instance of /home/ubuntu/ernz20-containers/demos/07_rstudio/tidyverse_long.sif (PID=18080)
 ```
 {: .output}
