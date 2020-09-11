@@ -47,7 +47,7 @@ However, at NeSI (as at many other HPC centres) we have installed the Nvidia dri
 
 On the host system side, when running GPU applications through Singularity the only requirement consists of the Nvidia driver for the relevant GPU card (the corresponding file is typically called `libcuda.so.<VERSION>`).
 
-Do not execute the next following commands, let us just have a look at them.
+Do not execute the following commands, let us just have a look at them.
 
 * Setup $SINGULARITY variable as convenience
   ```
@@ -122,9 +122,9 @@ sbatch --account=nesi99991 --reservation=jupyter gpu.sh
 
 > ## Running this example on NeSI
 >
-> The job will take about 5 minutes to complete and we only have
-> a few GPUs available for this workshop, so you may wait in the
-> queue for a while. Check the queue with:
+> The job will take a few minutes to complete and we only have
+> a couple of GPUs available for this workshop, so you may wait in the
+> queue for a while. Check your job status with:
 > ```
 > $ squeue -u $USER
 > ```
