@@ -71,16 +71,16 @@ singularity help
 > ```
 > {: .bash}
 >
-> One more thing: much of this work will be performed interactively on our Slurm cluster, so we need to request a small allocation:
+> One more thing for anyone _not_ working through JupyterHub. We recommend you request a small interactive Slurm allocation:
 >
 > ```
-> $ salloc --job-name="SingularityTutorial" --ntasks=4 --time=4:00:00 --account=nesi99991 --reservation=workshop
+> $ salloc --job-name="SingularityTutorial" --ntasks=2 --time=3:00:00 --account=nesi99991 --reservation=jupyter
 > ```
 > {: .bash}
 > ```
 > salloc: Granted job allocation 10179453
 > salloc: Waiting for resource configuration
-> salloc: Nodes wbn027 are ready for job
+> salloc: Nodes wbg004 are ready for job
 > ```
 > {: .output}
 >
